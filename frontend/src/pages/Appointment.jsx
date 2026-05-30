@@ -120,17 +120,31 @@ export default function Appointment() {
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <Label htmlFor="pet">Nome do pet</Label>
-                <Input id="pet" required placeholder="Ex: Thor" />
+                <Input
+                  id="pet"
+                  required
+                  minLength={2}
+                  maxLength={50}
+                  placeholder="Ex: Thor"
+                />
               </div>
               <div className="space-y-1.5">
                 <Label htmlFor="raca">Raça / porte</Label>
-                <Input id="raca" required placeholder="Ex: Shih Tzu, pequeno" />
+                <Input
+                  id="raca"
+                  required
+                  minLength={2}
+                  maxLength={50}
+                  placeholder="Ex: Shih Tzu, pequeno"
+                />
               </div>
               <div className="space-y-1.5">
                 <Label htmlFor="tutor">Seu nome</Label>
                 <Input
                   id="tutor"
                   required
+                  minLength={2}
+                  maxLength={100}
                   placeholder="Como podemos te chamar?"
                 />
               </div>
@@ -140,12 +154,20 @@ export default function Appointment() {
                   id="tel"
                   required
                   type="tel"
+                  minLength={10}
+                  maxLength={15}
+                  pattern="[\d\s()+-]+"
                   placeholder="(11) 99999-0000"
                 />
               </div>
               <div className="space-y-1.5 sm:col-span-2">
                 <Label htmlFor="data">Data</Label>
-                <Input id="data" required type="date" />
+                <Input
+                  id="data"
+                  required
+                  type="date"
+                  min={new Date().toISOString().split("T")[0]}
+                />
               </div>
             </div>
           </div>

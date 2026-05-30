@@ -95,7 +95,12 @@ export default function Login() {
                 </div>
                 <div className="space-y-1.5">
                   <Label htmlFor="si-password">Senha</Label>
-                  <Input id="si-password" type="password" required />
+                  <Input
+                    id="si-password"
+                    type="password"
+                    required
+                    minLength={8}
+                  />
                 </div>
                 <Button
                   type="submit"
@@ -115,6 +120,8 @@ export default function Login() {
                     id="su-name"
                     name="nome"
                     placeholder="Seu nome"
+                    type="text"
+                    minLength={2}
                     required
                   />
                 </div>
@@ -124,9 +131,13 @@ export default function Login() {
                     <Label htmlFor="su-phone">Telefone</Label>
                     <Input
                       id="su-phone"
+                      type="tel"
                       name="telefone"
                       placeholder="(11) 99999-0000"
                       required
+                      minLength={10}
+                      maxLength={15}
+                      pattern="[\d\s()+-]+"
                     />
                   </div>
                   <div className="space-y-1.5">
@@ -134,7 +145,9 @@ export default function Login() {
                     <Input
                       id="su-city"
                       name="cidade"
+                      type="text"
                       placeholder="Sua cidade"
+                      minLength={2}
                       required
                     />
                   </div>
@@ -147,6 +160,8 @@ export default function Login() {
                     name="endereco"
                     placeholder="Rua, número, bairro"
                     required
+                    type="text"
+                    minLength={5}
                   />
                 </div>
 
