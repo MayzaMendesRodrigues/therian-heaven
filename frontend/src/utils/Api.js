@@ -47,6 +47,10 @@ class Api {
       body: JSON.stringify(appointment),
     }).then(this._checkResponse);
   }
+
+  getTherians() {
+    return fetch(`${this._baseUrl}/therians`).then(this._checkResponse);
+  }
 }
 
 const api = new Api({

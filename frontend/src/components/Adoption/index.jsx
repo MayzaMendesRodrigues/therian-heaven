@@ -1,7 +1,39 @@
 import { ArrowRight } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import CardAdoption from "../CardAdoption";
-export default function Adoption() {
+
+function hasAuthToken() {
+  return Boolean(localStorage.getItem("jwt") || localStorage.getItem("token"));
+}
+
+export default function Adoption({ preview = false }) {
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(hasAuthToken);
+
+  useEffect(() => {
+    function syncAuth() {
+      setIsLoggedIn(hasAuthToken());
+    }
+
+    syncAuth();
+    window.addEventListener("storage", syncAuth);
+    window.addEventListener("auth:change", syncAuth);
+
+    return () => {
+      window.removeEventListener("storage", syncAuth);
+      window.removeEventListener("auth:change", syncAuth);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!preview && !isLoggedIn) {
+      navigate("/login");
+    }
+  }, [isLoggedIn, navigate, preview]);
+
+  const viewAllPath = isLoggedIn ? "/adoption" : "/login";
+
   return (
     <div>
       <section className="bg-secondary/40 py-20">
@@ -20,14 +52,18 @@ export default function Adoption() {
                 muda o mundo dele.
               </p>
             </div>
-            <NavLink
-              to="/adocao"
-              className="text-sm font-medium text-sage-deep inline-flex items-center gap-1 hover:gap-2 transition-all"
-            >
-              Ver todos <ArrowRight className="h-4 w-4" />
-            </NavLink>
+            {preview && (
+              <NavLink
+                to={viewAllPath}
+                className="text-sm font-medium text-sage-deep inline-flex items-center gap-1 hover:gap-2 transition-all"
+              >
+                Ver todos <ArrowRight className="h-4 w-4" />
+              </NavLink>
+            )}
           </div>
-          <CardAdoption />
+          {preview || isLoggedIn ? (
+            <CardAdoption limit={preview ? 3 : null} />
+          ) : null}
         </div>
       </section>
     </div>
