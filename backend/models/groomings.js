@@ -53,6 +53,21 @@ const groomingSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  pet: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  tutor: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  tel: {
+    type: String,
+    required: true,
+    trim: true,
+  },
 });
 
 const Grooming = mongoose.model("Grooming", groomingSchema);

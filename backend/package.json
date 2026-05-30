@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "node app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "seed:therians": "node scripts/seedTherians.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

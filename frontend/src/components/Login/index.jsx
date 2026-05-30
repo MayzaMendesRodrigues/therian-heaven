@@ -112,6 +112,7 @@ export default function Login() {
                   <Label htmlFor="si-password">Senha</Label>
                   <Input
                     id="si-password"
+                    name="password"
                     type="password"
                     required
                     minLength={8}

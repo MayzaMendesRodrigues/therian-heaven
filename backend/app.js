@@ -56,6 +56,7 @@ app.get("/health", (req, res) => {
 
 app.post("/login", loginUser);
 app.use("/therians", therianRouter);
+app.use("/grooming", groomingRouter);
 app.use("/groomings", groomingRouter);
 app.use("/users", userRouter);
 
