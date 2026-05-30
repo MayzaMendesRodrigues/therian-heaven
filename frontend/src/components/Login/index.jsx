@@ -10,6 +10,47 @@ export default function Login() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [feedback, setFeedback] = useState(null);
+  const [nameError, setNameError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  const [cityError, setCityError] = useState("");
+  const [adressError, setAdressError] = useState("");
+
+  //validação do nome:
+  function validateName(e) {
+    const input = e.target;
+
+    if (input.validity.tooShort) {
+      setNameError("O nome deve ter pelo menos 2 caracteres");
+    } else {
+      setNameError("");
+    }
+  }
+
+  //validação do telefone:
+  function validatePhone(e) {
+    const valor = e.target.value;
+
+    if (!/^[\d\s()+-]*$/.test(valor)) {
+      setPhoneError("Digite um telefone válido");
+    } else if (valor.length > 0 && valor.length < 10) {
+      setPhoneError("O telefone deve ter pelo menos 10 caracteres");
+    } else {
+      setPhoneError("");
+    }
+  }
+
+  //validação da cidade:
+  function validateCity(e) {
+    const input = e.target;
+
+    if (input.validity.tooShort) {
+      setCityError("Digite uma cidade válida");
+    } else {
+      setCityError("");
+    }
+  }
+
+  //validação do endereço
 
   async function handleSigninSubmit(e) {
     e.preventDefault();
@@ -115,6 +156,7 @@ export default function Login() {
                     name="password"
                     type="password"
                     required
+                    placeholder="******"
                     minLength={8}
                   />
                 </div>
@@ -150,7 +192,11 @@ export default function Login() {
                     type="text"
                     minLength={2}
                     required
+                    onChange={validateName}
                   />
+                  {nameError && (
+                    <p className="text-sm text-destructive">{nameError}</p>
+                  )}
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
@@ -164,8 +210,11 @@ export default function Login() {
                       required
                       minLength={10}
                       maxLength={15}
-                      pattern="[\d\s()+-]+"
+                      onChange={validatePhone}
                     />
+                    {phoneError && (
+                      <p className="text-sm text-destructive">{phoneError}</p>
+                    )}
                   </div>
                   <div className="space-y-1.5">
                     <Label htmlFor="su-city">Cidade</Label>
@@ -176,7 +225,11 @@ export default function Login() {
                       placeholder="Sua cidade"
                       minLength={2}
                       required
+                      onChange={validateCity}
                     />
+                    {cityError && (
+                      <p className="text-sm text-destructive">{cityError}</p>
+                    )}
                   </div>
                 </div>
 
@@ -189,7 +242,11 @@ export default function Login() {
                     required
                     type="text"
                     minLength={5}
+                    onChange={validateAdress}
                   />
+                  {adressError && (
+                    <p className="text-sm text-destructive">{adressError}</p>
+                  )}
                 </div>
 
                 <div className="space-y-1.5">

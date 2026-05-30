@@ -124,7 +124,7 @@ export default function Appointment() {
             : error.message,
       });
     }
-  };
+  }
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-secondary/10">
@@ -163,10 +163,11 @@ export default function Appointment() {
                     type="button"
                     key={id}
                     onClick={() => handleServiceSelect(selectedService)}
-                    className={`text-left rounded-2xl p-4 border transition-all flex items-start gap-3 ${active
-                      ? "border-primary bg-success shadow-md -"
-                      : "border-border bg-background hover:border-primary/50"
-                      }`}
+                    className={`text-left rounded-2xl p-4 border transition-all flex items-start gap-3 ${
+                      active
+                        ? "border-primary bg-success shadow-md -"
+                        : "border-border bg-background hover:border-primary/50"
+                    }`}
                   >
                     <div
                       className={`grid place-items-center h-10 w-10 rounded-xl ${active ? "bg-highlight text-primary-foreground" : "bg-muted text-muted-foreground"}`}
@@ -208,7 +209,11 @@ export default function Appointment() {
                   minLength={2}
                   maxLength={50}
                   placeholder="Ex: Thor"
+                  onChange={validatePetName}
                 />
+                {petNameError && (
+                  <p className="text-sm text-destructive">{petNameError}</p>
+                )}
               </div>
               <div className="space-y-1.5">
                 <Label htmlFor="raca">Raça / porte</Label>
@@ -223,7 +228,11 @@ export default function Appointment() {
                   minLength={2}
                   maxLength={50}
                   placeholder="Ex: Shih Tzu, pequeno"
+                  onChange={validatePetBreed}
                 />
+                {breedError && (
+                  <p className="text-sm text-destructive">{breedError}</p>
+                )}
               </div>
               <div className="space-y-1.5">
                 <Label htmlFor="tutor">Seu nome</Label>
@@ -238,7 +247,11 @@ export default function Appointment() {
                   minLength={2}
                   maxLength={100}
                   placeholder="Como podemos te chamar?"
+                  onChange={validateName}
                 />
+                {nameError && (
+                  <p className="text-sm text-destructive">{nameError}</p>
+                )}
               </div>
               <div className="space-y-1.5">
                 <Label htmlFor="tel">WhatsApp</Label>
@@ -255,7 +268,11 @@ export default function Appointment() {
                   maxLength={15}
                   pattern={"[0-9\\s\\(\\)\\+\\-]+"}
                   placeholder="(11) 99999-0000"
+                  onChange={validatePhone}
                 />
+                {phoneError && (
+                  <p className="text-sm text-destructive">{phoneError}</p>
+                )}
               </div>
               <div className="space-y-1.5 sm:col-span-2">
                 <Label htmlFor="data">Data</Label>
@@ -282,10 +299,11 @@ export default function Appointment() {
                     type="button"
                     key={h}
                     onClick={() => handleTimeSelect(h)}
-                    className={`px-4 h-10 rounded-full text-sm font-medium border transition-all ${active
-                      ? "bg-primary text-primary-foreground border-primary"
-                      : "bg-background border-border hover:border-primary/50"
-                      }`}
+                    className={`px-4 h-10 rounded-full text-sm font-medium border transition-all ${
+                      active
+                        ? "bg-primary text-primary-foreground border-primary"
+                        : "bg-background border-border hover:border-primary/50"
+                    }`}
                   >
                     {h}
                   </button>
