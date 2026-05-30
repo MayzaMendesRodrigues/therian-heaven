@@ -1,0 +1,226 @@
+[
+  {
+    "id": 1,
+    "nome": "Aurora",
+    "theriotype": "Lobo Cinzento",
+    "idade": 19,
+    "sexo": "Feminino",
+    "status": true,
+    "descricao": "Gosta de trilhas, fotografia e passar horas observando a natureza.",
+    "cidade": "Presidente Venceslau",
+    "estado": "São Paulo",
+    "fotoPerfil": "https://picsum.photos/seed/aurora/600/600",
+    "escolaridade": "Ensino Superior Completo",
+    "motivoDoResgate": "Encontrada sozinha em um servidor de Discord.",
+    "castrado": false,
+    "necessidadesEspeciais": [
+      "Wi-Fi",
+      "Café"
+    ],
+    "vacinas": [
+      {
+        "nome": "COVID-19",
+        "ano": 2025,
+        "data": "2025-10-12",
+        "status": "Aplicada"
+      },
+      {
+        "nome": "Influenza",
+        "ano": 2026,
+        "data": "2026-04-20",
+        "status": "Aplicada"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "nome": "Raven",
+    "theriotype": "Corvo",
+    "idade": 24,
+    "sexo": "Masculino",
+    "status": true,
+    "descricao": "Coleciona curiosidades, objetos brilhantes e fatos históricos aleatórios.",
+    "cidade": "Campinas",
+    "estado": "São Paulo",
+    "fotoPerfil": "https://picsum.photos/seed/raven/600/600",
+    "escolaridade": "Ensino Superior Incompleto",
+    "motivoDoResgate": "Observava pessoas pela janela por tempo excessivo.",
+    "castrado": false,
+    "necessidadesEspeciais": [
+      "Livros",
+      "Silêncio"
+    ],
+    "vacinas": [
+      {
+        "nome": "Influenza",
+        "ano": 2026,
+        "data": "2026-03-15",
+        "status": "Aplicada"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "nome": "Luna",
+    "theriotype": "Raposa Vermelha",
+    "idade": 21,
+    "sexo": "Feminino",
+    "status": false,
+    "descricao": "Curiosa, criativa e especialista em desaparecer quando aparecem responsabilidades.",
+    "cidade": "Curitiba",
+    "estado": "Paraná",
+    "fotoPerfil": "https://picsum.photos/seed/luna/600/600",
+    "escolaridade": "Ensino Superior Completo",
+    "motivoDoResgate": "Encontrada acumulando memes em excesso.",
+    "castrado": false,
+    "necessidadesEspeciais": [
+      "Cobertores",
+      "Chocolate quente"
+    ],
+    "vacinas": [
+      {
+        "nome": "dT (Difteria e Tétano)",
+        "ano": 2024,
+        "data": "2024-04-11",
+        "status": "Aplicada"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "nome": "Nyx",
+    "theriotype": "Gato Preto",
+    "idade": 22,
+    "sexo": "Feminino",
+    "status": true,
+    "descricao": "Prefere a madrugada, chuva e locais silenciosos.",
+    "cidade": "São Paulo",
+    "estado": "São Paulo",
+    "fotoPerfil": "https://picsum.photos/seed/nyx/600/600",
+    "escolaridade": "Ensino Superior Incompleto",
+    "motivoDoResgate": "Encontrada em fóruns obscuros às 3 da manhã.",
+    "castrado": false,
+    "necessidadesEspeciais": [
+      "Silêncio"
+    ],
+    "vacinas": [
+      {
+        "nome": "Influenza",
+        "ano": 2026,
+        "data": "2026-05-10",
+        "status": "Aplicada"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "nome": "Atlas",
+    "theriotype": "Urso Pardo",
+    "idade": 28,
+    "sexo": "Masculino",
+    "status": true,
+    "descricao": "Extremamente protetor e apaixonado por culinária.",
+    "cidade": "Belo Horizonte",
+    "estado": "Minas Gerais",
+    "fotoPerfil": "https://picsum.photos/seed/atlas/600/600",
+    "escolaridade": "Ensino Superior Completo",
+    "motivoDoResgate": "Perdido em grupos de receitas.",
+    "castrado": false,
+    "necessidadesEspeciais": [
+      "Comida caseira"
+    ],
+    "vacinas": [
+      {
+        "nome": "COVID-19",
+        "ano": 2025,
+        "data": "2025-08-20",
+        "status": "Aplicada"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "nome": "Kai",
+    "theriotype": "Tigre",
+    "idade": 26,
+    "sexo": "Masculino",
+    "status": true,
+    "descricao": "Competitivo, energético e sempre pronto para um desafio.",
+    "cidade": "Santos",
+    "estado": "São Paulo",
+    "fotoPerfil": "https://picsum.photos/seed/kai/600/600",
+    "escolaridade": "Ensino Superior Completo",
+    "motivoDoResgate": "Transformava toda conversa em competição.",
+    "castrado": false,
+    "necessidadesEspeciais": [
+      "Academia"
+    ],
+    "vacinas": [
+      {
+        "nome": "Febre Amarela",
+        "ano": 2023,
+        "data": "2023-05-14",
+        "status": "Aplicada"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "nome": "Willow",
+    "theriotype": "Corça",
+    "idade": 20,
+    "sexo": "Feminino",
+    "status": true,
+    "descricao": "Gentil, artística e apaixonada por música.",
+    "cidade": "Maringá",
+    "estado": "Paraná",
+    "fotoPerfil": "https://picsum.photos/seed/willow/600/600",
+    "escolaridade": "Ensino Superior Incompleto",
+    "motivoDoResgate": "Perdida em uma feira de artesanato.",
+    "castrado": false,
+    "necessidadesEspeciais": [
+      "Fones de ouvido"
+    ],
+    "vacinas": [
+      {
+        "nome": "Tríplice Viral",
+        "ano": 2022,
+        "data": "2022-03-10",
+        "status": "Aplicada"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "nome": "Fenrir",
+    "theriotype": "Lobo Ártico",
+    "idade": 27,
+    "sexo": "Masculino",
+    "status": true,
+    "descricao": "Líder nato e excelente companheiro para aventuras.",
+    "cidade": "Porto Alegre",
+    "estado": "Rio Grande do Sul",
+    "fotoPerfil": "https://picsum.photos/seed/fenrir/600/600",
+    "escolaridade": "Ensino Superior Completo",
+    "motivoDoResgate": "Abandonado após liderar um grupo de RPG grande demais.",
+    "castrado": false,
+    "necessidadesEspeciais": [
+      "Companhia",
+      "Chimarrão"
+    ],
+    "vacinas": [
+      {
+        "nome": "COVID-19",
+        "ano": 2025,
+        "data": "2025-09-28",
+        "status": "Aplicada"
+      },
+      {
+        "nome": "Influenza",
+        "ano": 2026,
+        "data": "2026-04-18",
+        "status": "Aplicada"
+      }
+    ]
+  }
+]
