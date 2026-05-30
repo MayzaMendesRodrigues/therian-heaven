@@ -121,7 +121,7 @@ export default function Login() {
                   <p
                     className={
                       feedback.type === "success"
-                        ? "text-sm font-medium text-green-700"
+                        ? "text-sm font-medium text-success"
                         : "text-sm font-medium text-destructive"
                     }
                   >
@@ -217,7 +217,7 @@ export default function Login() {
                   <p
                     className={
                       feedback.type === "success"
-                        ? "text-sm font-medium text-green-700"
+                        ? "text-sm font-medium text-success"
                         : "text-sm font-medium text-destructive"
                     }
                   >

@@ -147,7 +147,7 @@ export default function CardAdoption({ limit = null }) {
               </p>
               <Button
                 onClick={() => setSelected(a)}
-                className="mt-5 w-full rounded-full bg-green-600"
+                className="mt-5 w-full rounded-full bg-success"
               >
                 <Heart className="h-4 w-4 mr-2" /> Quero adotar {a.name}
               </Button>

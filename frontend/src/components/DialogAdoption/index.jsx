@@ -31,7 +31,7 @@ export function DialogAdoption({ selected, onClose }) {
   return (
     <>
       <Dialog open={!!selected && !successOpen} onOpenChange={(open) => !open && onClose()}>
-        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto p-0 rounded-3xl bg-green-600">
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto p-0 rounded-3xl bg-success">
           {selected && (
             <>
               <div className="grid md:grid-cols-2">
@@ -130,7 +130,7 @@ export function DialogAdoption({ selected, onClose }) {
                       >
                         <div className="flex items-center gap-3">
                           <span
-                            className={`flex h-7 w-7 items-center justify-center rounded-full ${v.aplicada ? "bg-green-500 text-white" : "bg-muted text-muted-foreground"}`}
+                            className={`flex h-7 w-7 items-center justify-center rounded-full ${v.aplicada ? "bg-success text-success-foreground" : "bg-muted text-muted-foreground"}`}
                           >
                             {v.aplicada ? (
                               <Check className="h-4 w-4" />
@@ -146,7 +146,7 @@ export function DialogAdoption({ selected, onClose }) {
                           </div>
                         </div>
                         <span
-                          className={`text-xs font-medium px-2.5 py-1 rounded-full ${v.aplicada ? "bg-green-100 text-green-800" : "bg-amber-100 text-amber-800"}`}
+                          className={`text-xs font-medium px-2.5 py-1 rounded-full ${v.aplicada ? "bg-success-soft text-success-deep" : "bg-warning-soft text-warning-deep"}`}
                         >
                           {v.aplicada ? "Aplicada" : "Pendente"}
                         </span>

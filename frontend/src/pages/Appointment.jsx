@@ -132,7 +132,7 @@ export default function Appointment() {
         <p className="text-sm font-medium text-primary uppercase tracking-wider">
           Agendamento
         </p>
-        <h1 className="mt-2 text-4xl md:text-5xl font-bold tracking-tight bg-purple-600 text-yellow-600">
+        <h1 className="mt-2 text-4xl md:text-5xl font-bold tracking-tight bg-highlight text-warning">
           Reserve um horário
         </h1>
         <p className="mt-3 text-muted-foreground max-w-2xl">
@@ -164,12 +164,12 @@ export default function Appointment() {
                     key={id}
                     onClick={() => handleServiceSelect(selectedService)}
                     className={`text-left rounded-2xl p-4 border transition-all flex items-start gap-3 ${active
-                      ? "border-primary bg-green-600 shadow-md -"
+                      ? "border-primary bg-success shadow-md -"
                       : "border-border bg-background hover:border-primary/50"
                       }`}
                   >
                     <div
-                      className={`grid place-items-center h-10 w-10 rounded-xl ${active ? "bg-purple-600 text-primary-foreground" : "bg-muted text-muted-foreground"}`}
+                      className={`grid place-items-center h-10 w-10 rounded-xl ${active ? "bg-highlight text-primary-foreground" : "bg-muted text-muted-foreground"}`}
                     >
                       <Icon className="h-5 w-5" />
                     </div>
@@ -298,7 +298,7 @@ export default function Appointment() {
             <p
               className={
                 feedback.type === "success"
-                  ? "text-sm font-medium text-green-700"
+                  ? "text-sm font-medium text-success"
                   : "text-sm font-medium text-destructive"
               }
             >

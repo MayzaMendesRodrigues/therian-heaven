@@ -11,18 +11,18 @@ export default function Main() {
 
         <div className="mx-auto max-w-7xl px-6 pt-16 pb-24 grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full bg-card/70 border border-border px-3 py-1 text-xs font-medium text-primary text-purple-600 ">
+            <span className="inline-flex items-center gap-2 rounded-full bg-card/70 border border-border px-3 py-1 text-xs font-medium text-highlight">
               <Heart className="h-3.5 w-3.5 fill-current" />
               Mais de 2.000 therianZinhos cuidados
             </span>
 
-            <h1 className="mt-5 font-display text-5xl md:text-6xl font-bold leading-[1.05] text-foreground text-green-600">
+            <h1 className="mt-5 font-display text-5xl md:text-6xl font-bold leading-[1.05] text-success">
               Cuidado de verdade
               <br />
               para o seu melhor amigo.
             </h1>
 
-            <p className="mt-5 text-lg text-muted-foreground max-w-xl text-red-600">
+            <p className="mt-5 text-lg text-muted-foreground max-w-xl text-warning">
               Banho, tosa e momentos de carinho — e um espaço para conectar
               animais resgatados a famílias que vão amá-los para sempre.
             </p>
@@ -32,7 +32,7 @@ export default function Main() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="rounded-full px-7 h-12 bg-background/60 border-border text-foreground hover:bg-card text-purple-600"
+                className="rounded-full px-7 h-12 bg-background/60 border-border hover:bg-card text-highlight"
               >
                 <NavLink to="/adocao">
                   <Heart className="h-4 w-4" /> Adotar um therianZinho
@@ -41,10 +41,10 @@ export default function Main() {
             </div>
 
             <div className="mt-8 flex items-center gap-4 text-sm text-muted-foreground">
-              <div className="flex items-center gap-1 text-foreground font-medium text-yellow-500">
-                <Star className="h-4 w-4 fill-current text-accent text-yellow-600" />{" "}
+              <div className="flex items-center gap-1 text-foreground font-medium text-warning">
+                <Star className="h-4 w-4 fill-current text-warning" />{" "}
                 2.3/5
-                <span className="text-green-600 font-normal">
+                <span className="text-success font-normal">
                   de tutores felizes
                 </span>
               </div>
@@ -52,7 +52,7 @@ export default function Main() {
           </div>
 
           <div className="relative w-full min-h-[60vh] lg:min-h-[80vh] flex items-center justify-end overflow-visible">
-            <div className="absolute -inset-4 md:-inset-10 bg-orange-700 -rotate-1 rounded-[60px] md:rounded-[120px] rounded-bl-[180px] md:rounded-bl-[300px] -z-10" />
+            <div className="absolute -inset-4 md:-inset-10 bg-warning-deep -rotate-1 rounded-[60px] md:rounded-[120px] rounded-bl-[180px] md:rounded-bl-[300px] -z-10" />
 
             <img
               src={therian}

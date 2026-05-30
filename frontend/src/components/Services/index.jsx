@@ -31,7 +31,7 @@ export default function Service() {
     },
   ];
   return (
-    <section className="mx-auto  px-6 py-20 bg-green-600 ">
+    <section className="mx-auto  px-6 py-20 bg-success ">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
         <div>
           <p className="text-sm font-medium text-sage-deep uppercase tracking-wider">
@@ -53,7 +53,7 @@ export default function Service() {
         {services.map(({ icon: Icon, title, desc }) => (
           <div
             key={title}
-            className="bg-card rounded-2xl p-6 shadow-card border border-border/50 hover:shadow-soft hover:-translate-y-1 transition-all text-red-600"
+            className="bg-card rounded-2xl p-6 shadow-card border border-border/50 hover:shadow-soft hover:-translate-y-1 transition-all text-foreground"
           >
             <div className="grid place-items-center h-12 w-12 rounded-xl bg-sage-soft mb-4">
               <Icon className="h-5 w-5 text-sage-deep" />

@@ -36,9 +36,36 @@ export default {
           DEFAULT: "var(--accent)",
           foreground: "var(--accent-foreground)",
         },
+        sage: {
+          DEFAULT: "var(--sage-soft)",
+          soft: "var(--sage-soft)",
+          deep: "var(--sage-deep)",
+        },
+        success: {
+          DEFAULT: "var(--success)",
+          foreground: "var(--success-foreground)",
+          soft: "var(--success-soft)",
+          deep: "var(--success-deep)",
+        },
+        warning: {
+          DEFAULT: "var(--warning)",
+          foreground: "var(--warning-foreground)",
+          soft: "var(--warning-soft)",
+          deep: "var(--warning-deep)",
+        },
+        info: {
+          DEFAULT: "var(--info)",
+          foreground: "var(--info-foreground)",
+        },
+        highlight: {
+          DEFAULT: "var(--highlight)",
+          foreground: "var(--highlight-foreground)",
+        },
         destructive: {
           DEFAULT: "var(--destructive)",
           foreground: "var(--destructive-foreground)",
+          soft: "var(--destructive-soft)",
+          deep: "var(--destructive-deep)",
         },
         border: "var(--border)",
         input: "var(--input)",

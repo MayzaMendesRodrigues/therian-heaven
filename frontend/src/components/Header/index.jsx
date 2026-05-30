@@ -102,7 +102,7 @@ export default function Header() {
               <Button
                 asChild
                 size="sm"
-                className="rounded-full px-5 bg-amber-600"
+                className="rounded-full px-5 bg-warning-deep"
               >
                 <NavLink to="/agendamento">Agendar banho</NavLink>
               </Button>

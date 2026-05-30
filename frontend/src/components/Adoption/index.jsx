@@ -43,10 +43,10 @@ export default function Adoption({ preview = false }) {
               <p className="text-sm font-medium text-sage-deep uppercase tracking-wider">
                 Adoção
               </p>
-              <h2 className="mt-2 text-4xl font-bold text-foreground bg-yellow-600 text-blue-600">
+              <h2 className="mt-2 text-4xl font-bold text-foreground bg-warning text-info">
                 Eles estão à sua espera
               </h2>
-              <p className="mt-3 text-muted-foreground max-w-xl text-red-600">
+              <p className="mt-3 text-muted-foreground max-w-xl text-warning">
                 Enquanto você lê esta mensagem, muitos deles passam mais um dia
                 sem uma família. Adotar não muda apenas a vida de um animal —
                 muda o mundo dele.

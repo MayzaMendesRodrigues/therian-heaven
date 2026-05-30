@@ -35,6 +35,28 @@
   --input: #1f2335;
   --ring: #ff007f;
 
+  --sage-soft: #17251f;
+  --sage-deep: #9ce6a5;
+
+  --success: #39ff14;
+  --success-foreground: #000000;
+  --success-soft: rgba(57, 255, 20, 0.12);
+  --success-deep: #126400;
+
+  --warning: #facc15;
+  --warning-foreground: #000000;
+  --warning-soft: rgba(250, 204, 21, 0.16);
+  --warning-deep: #f59e0b;
+
+  --info: #38bdf8;
+  --info-foreground: #000000;
+
+  --highlight: #a855f7;
+  --highlight-foreground: #ffffff;
+
+  --destructive-soft: rgba(255, 51, 51, 0.12);
+  --destructive-deep: #b91c1c;
+
   /* Gradientes Psicodélicos e Sombras com "Glow" Neon */
   --gradient-hero: linear-gradient(135deg, #161925 0%, #25162b 100%);
   --gradient-soft: linear-gradient(180deg, #25162b 0%, #0f111a 100%);
