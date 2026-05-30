@@ -6,7 +6,6 @@
 
 @tailwind utilities;
 
-
 :root {
   --radius: 1rem;
 
@@ -16,9 +15,9 @@
   --terracotta: #ff007f; /* Rosa Choque Neon (Principal) */
   --terracotta-deep: #39ff14; /* Verde Limão Elétrico / Neon */
 
-  --background: #0f111a; /* Fundo escuro absoluto */
+  --background: #611da5; /* Fundo escuro absoluto */
   --foreground: #ffffff; /* Texto em branco puro para leitura */
-  --card: #161925; /* Cards cinza-grafite escuro */
+  --card: #ffff; /* Cards cinza-grafite escuro */
   --card-foreground: #ffffff;
   --popover: #161925;
   --popover-foreground: #ffffff;
