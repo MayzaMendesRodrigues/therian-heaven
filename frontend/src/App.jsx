@@ -13,6 +13,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="agendamento" element={<Appointment />} />
           <Route path="adocao" element={<Adoption />} />
+          <Route path="adoption" element={<Adoption />} />
           <Route path="login" element={<Login />} />
         </Route>
       </Routes>

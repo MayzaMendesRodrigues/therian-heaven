@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
 import User from "../models/users.js";
 
 const getUserFilter = (id) => {
@@ -22,7 +23,13 @@ const handleUserError = (error, res, next) => {
   }
 
   if (error.code === 11000) {
-    res.status(409).json({ message: "Usuario ja cadastrado" });
+    const field = Object.keys(error.keyPattern || {})[0];
+    const message =
+      field === "email"
+        ? "Email ja cadastrado"
+        : `Valor duplicado no campo ${field || "desconhecido"}`;
+
+    res.status(409).json({ message });
     return;
   }
 
@@ -69,6 +76,38 @@ export const createUser = async (req, res, next) => {
     res.status(201).json(userResponse);
   } catch (error) {
     handleUserError(error, res, next);
+  }
+};
+
+export const loginUser = async (req, res, next) => {
+  try {
+    const { email, senha, password } = req.body;
+    const userPassword = senha || password;
+
+    if (!email || !userPassword) {
+      res.status(400).json({ message: "Informe email e senha" });
+      return;
+    }
+
+    const user = await User.findOne({ email }).select("+senha");
+
+    if (!user || user.senha !== userPassword) {
+      res.status(401).json({ message: "Email ou senha invalidos" });
+      return;
+    }
+
+    const token = jwt.sign(
+      { id: user._id, email: user.email },
+      process.env.JWT_SECRET || "dev-secret",
+      { expiresIn: "1d" },
+    );
+
+    const userResponse = user.toObject();
+    delete userResponse.senha;
+
+    res.json({ token, user: userResponse });
+  } catch (error) {
+    next(error);
   }
 };
 

@@ -1,6 +1,46 @@
 import { Button } from "@/components/ui/button";
+import { LogOut } from "lucide-react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+
 export default function Header() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    function syncUser() {
+      const storedUser = localStorage.getItem("user");
+
+      if (!storedUser) {
+        setUser(null);
+        return;
+      }
+
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch {
+        localStorage.removeItem("user");
+        setUser(null);
+      }
+    }
+
+    syncUser();
+    window.addEventListener("storage", syncUser);
+    window.addEventListener("auth:change", syncUser);
+
+    return () => {
+      window.removeEventListener("storage", syncUser);
+      window.removeEventListener("auth:change", syncUser);
+    };
+  }, []);
+
+  function handleLogout() {
+    localStorage.removeItem("jwt");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
+    window.dispatchEvent(new Event("auth:change"));
+  }
+
   return (
     <header className="header-container">
       <div className="header-wrapper">
@@ -36,21 +76,37 @@ export default function Header() {
               </NavLink>
             </nav>
 
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="rounded-full px-5"
-            >
-              <NavLink to="/login">Entrar</NavLink>
-            </Button>
-            <Button
-              asChild
-              size="sm"
-              className="rounded-full px-5 bg-amber-600"
-            >
-              <NavLink to="/agendamento">Agendar banho</NavLink>
-            </Button>
+            <div className="flex items-center gap-3">
+              {user ? (
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="rounded-full px-4 gap-2"
+                  onClick={handleLogout}
+                >
+                  <span className="max-w-32 truncate">{user.nome}</span>
+                  <LogOut className="h-4 w-4" aria-hidden="true" />
+                  <span className="sr-only">Sair</span>
+                </Button>
+              ) : (
+                <Button
+                  asChild
+                  variant="outline"
+                  size="sm"
+                  className="rounded-full px-5"
+                >
+                  <NavLink to="/login">Entrar</NavLink>
+                </Button>
+              )}
+              <Button
+                asChild
+                size="sm"
+                className="rounded-full px-5 bg-amber-600"
+              >
+                <NavLink to="/agendamento">Agendar banho</NavLink>
+              </Button>
+            </div>
           </div>
         </header>
       </div>

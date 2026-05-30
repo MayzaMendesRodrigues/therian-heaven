@@ -2,6 +2,8 @@ import cors from "cors";
 import "dotenv/config";
 import express from "express";
 import mongoose from "mongoose";
+import User from "./models/users.js";
+import { loginUser } from "./controllers/users.js";
 import groomingRouter from "./routes/groomings.js";
 import therianRouter from "./routes/therians.js";
 import userRouter from "./routes/users.js";
@@ -16,6 +18,7 @@ if (!MONGODB_URI) {
 
 try {
   await mongoose.connect(MONGODB_URI);
+  await User.syncIndexes();
   console.log("MongoDB conectado com sucesso");
 } catch (error) {
   console.error("Erro ao conectar ao MongoDB", error);
@@ -51,6 +54,7 @@ app.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
+app.post("/login", loginUser);
 app.use("/therians", therianRouter);
 app.use("/groomings", groomingRouter);
 app.use("/users", userRouter);

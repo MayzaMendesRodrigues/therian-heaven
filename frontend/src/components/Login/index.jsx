@@ -3,28 +3,54 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { API_URL } from "@/lib/utils";
+import api from "@/utils/Api";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [feedback, setFeedback] = useState(null);
 
-  function handleSigninSubmit(e) {
-    e.preventDefault();
-    setLoading(true);
-    setFeedback({
-      type: "error",
-      message: "Login ainda nao esta conectado no backend.",
-    });
-    setLoading(false);
-  }
-
-  async function handleSignupSubmit(e) {
+  async function handleSigninSubmit(e) {
     e.preventDefault();
     setLoading(true);
     setFeedback(null);
 
     const formData = new FormData(e.currentTarget);
+
+    try {
+      const data = await api.login({
+        email: formData.get("email"),
+        password: formData.get("password"),
+      });
+
+      localStorage.setItem("jwt", data.token);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      window.dispatchEvent(new Event("auth:change"));
+
+      setFeedback({
+        type: "success",
+        message: "Login realizado com sucesso.",
+      });
+      navigate("/adoption");
+    } catch (error) {
+      setFeedback({
+        type: "error",
+        message: error.message,
+      });
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleSignupSubmit(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setLoading(true);
+    setFeedback(null);
+
+    const formData = new FormData(form);
 
     const user = {
       nome: formData.get("nome"),
@@ -36,21 +62,9 @@ export default function Login() {
     };
 
     try {
-      const response = await fetch(`${API_URL}/users`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
+      await api.signup(user);
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Nao foi possivel criar sua conta.");
-      }
-
-      e.currentTarget.reset();
+      form.reset();
       setFeedback({
         type: "success",
         message: "Conta criada com sucesso! Usuario salvo no banco de dados.",
@@ -88,6 +102,7 @@ export default function Login() {
                   <Label htmlFor="si-email">E-mail</Label>
                   <Input
                     id="si-email"
+                    name="email"
                     type="email"
                     placeholder="seu@email.com"
                     required
@@ -102,6 +117,17 @@ export default function Login() {
                     minLength={8}
                   />
                 </div>
+                {feedback && (
+                  <p
+                    className={
+                      feedback.type === "success"
+                        ? "text-sm font-medium text-green-700"
+                        : "text-sm font-medium text-destructive"
+                    }
+                  >
+                    {feedback.message}
+                  </p>
+                )}
                 <Button
                   type="submit"
                   className="w-full rounded-full"
