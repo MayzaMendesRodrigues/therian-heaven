@@ -38,6 +38,7 @@ export default function Login() {
                     id="si-email"
                     type="email"
                     placeholder="seu@email.com"
+                    pattern="[^\s@]+@[^\s@]+\.[^\s@]+"
                     required
                   />
                 </div>
@@ -59,7 +60,12 @@ export default function Login() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-1.5">
                   <Label htmlFor="su-name">Nome completo</Label>
-                  <Input id="su-name" placeholder="Seu nome" required />
+                  <Input
+                    id="su-name"
+                    placeholder="Seu nome"
+                    required
+                    type="text"
+                  />
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
@@ -67,13 +73,19 @@ export default function Login() {
                     <Label htmlFor="su-phone">Telefone</Label>
                     <Input
                       id="su-phone"
+                      type="number"
                       placeholder="(11) 99999-0000"
                       required
                     />
                   </div>
                   <div className="space-y-1.5">
                     <Label htmlFor="su-city">Cidade</Label>
-                    <Input id="su-city" placeholder="Sua cidade" required />
+                    <Input
+                      id="su-city"
+                      placeholder="Sua cidade"
+                      required
+                      type="text"
+                    />
                   </div>
                 </div>
 
