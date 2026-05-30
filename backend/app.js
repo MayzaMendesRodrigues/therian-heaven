@@ -1,12 +1,26 @@
 import cors from "cors";
 import "dotenv/config";
 import express from "express";
+import mongoose from "mongoose";
 import groomingRouter from "./routes/groomings.js";
 import therianRouter from "./routes/therians.js";
 import userRouter from "./routes/users.js";
 
 const PORT = process.env.PORT || 4000;
+const MONGODB_URI = process.env.MONGODB_URI;
 const app = express();
+
+if (!MONGODB_URI) {
+  throw new Error("MONGODB_URI nao configurada no .env");
+}
+
+try {
+  await mongoose.connect(MONGODB_URI);
+  console.log("MongoDB conectado com sucesso");
+} catch (error) {
+  console.error("Erro ao conectar ao MongoDB", error);
+  process.exit(1);
+}
 
 const allowedOrigins = [
   "http://localhost:5173",

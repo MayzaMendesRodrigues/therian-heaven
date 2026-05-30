@@ -3,14 +3,66 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { API_URL } from "@/lib/utils";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
+  const [feedback, setFeedback] = useState(null);
 
-  function handleSubmit(e) {
+  function handleSigninSubmit(e) {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => setLoading(false), 1500);
+    setFeedback({
+      type: "error",
+      message: "Login ainda nao esta conectado no backend.",
+    });
+    setLoading(false);
+  }
+
+  async function handleSignupSubmit(e) {
+    e.preventDefault();
+    setLoading(true);
+    setFeedback(null);
+
+    const formData = new FormData(e.currentTarget);
+
+    const user = {
+      nome: formData.get("nome"),
+      telefone: formData.get("telefone"),
+      cidade: formData.get("cidade"),
+      endereco: formData.get("endereco"),
+      email: formData.get("email"),
+      senha: formData.get("senha"),
+    };
+
+    try {
+      const response = await fetch(`${API_URL}/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Nao foi possivel criar sua conta.");
+      }
+
+      e.currentTarget.reset();
+      setFeedback({
+        type: "success",
+        message: "Conta criada com sucesso! Usuario salvo no banco de dados.",
+      });
+    } catch (error) {
+      setFeedback({
+        type: "error",
+        message: error.message,
+      });
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -31,7 +83,7 @@ export default function Login() {
             </TabsList>
 
             <TabsContent value="signin" className="mt-5">
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSigninSubmit} className="space-y-4">
                 <div className="space-y-1.5">
                   <Label htmlFor="si-email">E-mail</Label>
                   <Input
@@ -56,10 +108,15 @@ export default function Login() {
             </TabsContent>
 
             <TabsContent value="signup" className="mt-5">
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSignupSubmit} className="space-y-4">
                 <div className="space-y-1.5">
                   <Label htmlFor="su-name">Nome completo</Label>
-                  <Input id="su-name" placeholder="Seu nome" required />
+                  <Input
+                    id="su-name"
+                    name="nome"
+                    placeholder="Seu nome"
+                    required
+                  />
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
@@ -67,13 +124,19 @@ export default function Login() {
                     <Label htmlFor="su-phone">Telefone</Label>
                     <Input
                       id="su-phone"
+                      name="telefone"
                       placeholder="(11) 99999-0000"
                       required
                     />
                   </div>
                   <div className="space-y-1.5">
                     <Label htmlFor="su-city">Cidade</Label>
-                    <Input id="su-city" placeholder="Sua cidade" required />
+                    <Input
+                      id="su-city"
+                      name="cidade"
+                      placeholder="Sua cidade"
+                      required
+                    />
                   </div>
                 </div>
 
@@ -81,6 +144,7 @@ export default function Login() {
                   <Label htmlFor="su-address">Endereço</Label>
                   <Input
                     id="su-address"
+                    name="endereco"
                     placeholder="Rua, número, bairro"
                     required
                   />
@@ -90,6 +154,7 @@ export default function Login() {
                   <Label htmlFor="su-email">E-mail</Label>
                   <Input
                     id="su-email"
+                    name="email"
                     type="email"
                     placeholder="seu@email.com"
                     required
@@ -98,8 +163,26 @@ export default function Login() {
 
                 <div className="space-y-1.5">
                   <Label htmlFor="su-password">Senha</Label>
-                  <Input id="su-password" type="password" required />
+                  <Input
+                    id="su-password"
+                    name="senha"
+                    type="password"
+                    minLength={8}
+                    required
+                  />
                 </div>
+
+                {feedback && (
+                  <p
+                    className={
+                      feedback.type === "success"
+                        ? "text-sm font-medium text-green-700"
+                        : "text-sm font-medium text-destructive"
+                    }
+                  >
+                    {feedback.message}
+                  </p>
+                )}
 
                 <Button
                   type="submit"
