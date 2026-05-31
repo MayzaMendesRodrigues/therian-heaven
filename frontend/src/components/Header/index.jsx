@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import therianLogo from "@/assets/therian logo.png";
 import { LogOut } from "lucide-react";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
@@ -50,8 +51,12 @@ export default function Header() {
               to="/"
               className="flex items-center gap-2 font-display font-bold text-lg text-foreground"
             >
-              <span className="grid place-items-center h-9 w-9 rounded-full bg-primary text-primary-foreground">
-                {/* <PawPrint className="h-4 w-4" /> */}
+              <span className="grid place-items-center h-9 w-9 rounded-full bg-primary text-primary-foreground overflow-hidden">
+                <img
+                  src={therianLogo}
+                  alt="Therian Heaven"
+                  className="h-full w-full object-cover"
+                />
               </span>
               Therian Heaven
             </NavLink>
@@ -124,5 +129,4 @@ export default function Header() {
     </header>
   );
 }
-
 
