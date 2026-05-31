@@ -1,6 +1,6 @@
 import { Heart, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import therian from "@/assets/therian-images/therian21.png";
+import therian from "@/assets/therian-images/therian11.png";
 import { NavLink } from "react-router-dom";
 
 export default function Main() {
@@ -50,7 +50,7 @@ export default function Main() {
             </div>
           </div>
 
-          <div className="relative w-full min-h-[60vh] lg:min-h-[80vh] flex items-center justify-end overflow-visible">
+          <div className="relative w-full min-h-[60vh] lg:min-h-[80vh] flex items-center space-between overflow-visible">
             <div className="absolute -inset-4 md:-inset-10 -rotate-1 rounded-[60px] md:rounded-[120px] rounded-bl-[180px] md:rounded-bl-[300px] -z-10" />
 
             <img
@@ -58,11 +58,11 @@ export default function Main() {
               alt="Imagem de um therianZinho feliz e saudável, representando o cuidado e amor que oferecemos aos nossos amigos peludos."
               width={1536}
               height={1280}
-              className="relative w-full h-[80vh] md:h-[70vh] lg:h-[85vh] object-cover border border-border/50
+              className="relative w-full h-[70vh] md:h-[70vh] lg:h-[70vh] object-cover 
                rounded-[60px] md:rounded-[100px] 
                rounded-bl-[150px] md:rounded-bl-[250px] 
                rounded-tr-[40px] md:rounded-tr-[150px]
-               lg:-mr-32 lg:w-[120%] lg:max-w-none"
+               lg:-mr-32 lg:w-[100%] lg:max-w-none"
             />
           </div>
         </div>
