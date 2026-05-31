@@ -6,6 +6,16 @@
 
 @tailwind utilities;
 
+html {
+  color: var(--foreground);
+  background-color: var(--background);
+}
+
+body {
+  min-height: 100%;
+  background: inherit;
+  color: inherit;
+}
 
 :root {
   /* Arredondamento padrão de cards, inputs e botões */
@@ -40,6 +50,9 @@
   /* CTA principal: Adotar, Entrar, Cadastrar, Salvar */
   --primary: #ff6b9f;
 
+  /* Cor de hover para botões e CTA primário */
+  --primary-hover: #fcc2d6;
+
   /* Texto exibido sobre a cor principal */
   --primary-foreground: #ffffff;
 
@@ -49,6 +62,8 @@
 
   /* Botões secundários, filtros e ações neutras */
   --secondary: #1d2633;
+  
+  --secondary-hover: #61748e;
 
   /* Texto exibido sobre a cor secundária */
   --secondary-foreground: #f8fafc;
@@ -58,10 +73,10 @@
   ================================================== */
 
   /* Cor para destacar elementos importantes da interface */
-  --accent: #ce547f;
+  --accent: #ff6b9f ;
 
   /* Texto exibido sobre elementos destacados */
-  --accent-foreground: #0f172a;
+  --accent-foreground: #ffffff;
 
   /* ==================================================
      ESTADOS DE SUCESSO
@@ -102,6 +117,22 @@
 
   /* Texto exibido sobre elementos informativos */
   --info-foreground: #ffffff;
+
+  /* ==================================================
+     VARIANTES DE ESTADO SUAVE
+  ================================================== */
+
+  /* Estado de sucesso leve para backgrounds e badges */
+  --success-soft: #dcfce7;
+  --success-deep: #166534;
+
+  /* Estado de aviso leve para backgrounds e badges */
+  --warning-soft: #fef3c7;
+  --warning-deep: #92400e;
+
+  /* Estado destrutivo leve para backgrounds e badges */
+  --destructive-soft: #fecaca;
+  --destructive-deep: #991b1b;
 
   /* ==================================================
      ESTRUTURA DA INTERFACE
@@ -146,4 +177,15 @@
 
   /* Sombra padrão para cards, modais e elementos elevados */
   --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* Botões primários com hover levemente mais claro */
+.bg-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Hover para elementos com bg-secondary — mesma lógica do primary */
+.bg-secondary:hover {
+   background-color: var(--secondary-hover);
+   color: var(--secondary-foreground);
 }

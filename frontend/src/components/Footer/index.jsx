@@ -2,7 +2,7 @@ export default function index() {
   return (
     <footer
       id="contato"
-      className="mt-24 border-t border-border/60 bg-background text-foreground"
+      className="border-t border-border/60 bg-background text-foreground"
     >
       <div className="mx-auto max-w-7xl px-6 py-14 grid gap-10 md:grid-cols-4">
         <div className="md:col-span-2">

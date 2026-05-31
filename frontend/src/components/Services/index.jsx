@@ -31,7 +31,7 @@ export default function Service() {
     },
   ];
   return (
-    <section className="mx-auto  px-6 py-20 bg-secondary ">
+    <section className="mx-auto px-6 py-20 bg-surface">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
         <div>
           <p className="text-sm font-medium text-primary uppercase tracking-wider">

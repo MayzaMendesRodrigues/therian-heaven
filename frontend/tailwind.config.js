@@ -41,6 +41,11 @@ export default {
           soft: "var(--sage-soft)",
           deep: "var(--sage-deep)",
         },
+        surface: {
+          DEFAULT: "var(--surface)",
+          muted: "var(--surface-muted)",
+          strong: "var(--surface-strong)",
+        },
         success: {
           DEFAULT: "var(--success)",
           foreground: "var(--success-foreground)",

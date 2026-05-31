@@ -132,7 +132,7 @@ export default function Appointment() {
         <p className="text-sm font-medium text-primary uppercase tracking-wider">
           Agendamento
         </p>
-        <h1 className="mt-2 text-4xl md:text-5xl font-bold tracking-tight bg-highlight text-warning">
+        <h1 className="mt-2 text-4xl md:text-5xl font-bold tracking-tight bg-highlight text-accent">
           Reserve um horário
         </h1>
         <p className="mt-3 text-muted-foreground max-w-2xl">
@@ -144,7 +144,7 @@ export default function Appointment() {
       <section className="mx-auto max-w-7xl w-full px-6 grid lg:grid-cols-[1fr_360px] gap-8 pb-20">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="bg-card rounded-3xl p-8 shadow-lg border border-border/60 space-y-8"
+          className="bg-card rounded-[2rem] p-8 shadow-soft border border-border/60 space-y-8"
         >
           <div>
             <h2 className="text-xl font-semibold mb-4">1. Escolha o serviço</h2>
@@ -163,14 +163,18 @@ export default function Appointment() {
                     type="button"
                     key={id}
                     onClick={() => handleServiceSelect(selectedService)}
-                    className={`text-left rounded-2xl p-4 border transition-all flex items-start gap-3 ${
+                    className={`text-left rounded-3xl p-4 border transition-all duration-200 flex items-start gap-3 ${
                       active
-                        ? "border-primary bg-success shadow-md -"
+                        ? "border-primary bg-primary/10 shadow-soft"
                         : "border-border bg-background hover:border-primary/50"
                     }`}
                   >
                     <div
-                      className={`grid place-items-center h-10 w-10 rounded-xl ${active ? "bg-highlight text-primary-foreground" : "bg-muted text-muted-foreground"}`}
+                      className={`grid place-items-center h-10 w-10 rounded-xl ${
+                        active
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-muted text-muted-foreground"
+                      }`}
                     >
                       <Icon className="h-5 w-5" />
                     </div>
@@ -283,9 +287,9 @@ export default function Appointment() {
                     type="button"
                     key={h}
                     onClick={() => handleTimeSelect(h)}
-                    className={`px-4 h-10 rounded-full text-sm font-medium border transition-all ${
+                    className={`px-4 h-10 rounded-full text-sm font-medium border transition-all duration-200 ${
                       active
-                        ? "bg-primary text-primary-foreground border-primary"
+                        ? "bg-primary/10 text-primary border-primary"
                         : "bg-background border-border hover:border-primary/50"
                     }`}
                   >
@@ -320,7 +324,7 @@ export default function Appointment() {
         </form>
 
         <aside className="space-y-4">
-          <div className="bg-card rounded-3xl p-6 border border-border/60 shadow-md">
+          <div className="bg-card rounded-3xl p-6 border border-border/60 shadow-soft">
             <h3 className="font-semibold text-lg">Resumo</h3>
             <div className="mt-4 space-y-2 text-sm">
               <div className="flex justify-between">

@@ -93,7 +93,13 @@ export default function Header() {
 
               <NavLink
                 to="/agendamento"
-                className="hover:text-foreground transition-colors"
+                className={({ isActive }) =>
+                  `transition-colors ${
+                    isActive
+                      ? "text-primary font-semibold border-b-2 border-primary pb-1"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`
+                }
               >
                 Agendamento
               </NavLink>
@@ -135,7 +141,7 @@ export default function Header() {
                   type="button"
                   variant="outline"
                   size="sm"
-                  className="rounded-full px-4 gap-2 bg-accent text-foreground"
+                  className="rounded-full px-4 gap-2 bg-primary text-foreground hover:bg-primary-hover"
                   onClick={handleLogout}
                 >
                   <span className="max-w-32 truncate">{user.nome}</span>
@@ -147,7 +153,7 @@ export default function Header() {
                   asChild
                   variant="outline"
                   size="sm"
-                  className="rounded-full px-4 gap-2 bg-accent text-foreground hover:bg-accent-foreground hover:text-accent"
+                  className="rounded-full px-4 gap-2 bg-primary text-foreground hover:bg-primary-hover hover:text-primary-foreground"
                 >
                   <NavLink to="/login">Entrar</NavLink>
                 </Button>
@@ -156,7 +162,7 @@ export default function Header() {
               <Button
                 asChild
                 size="sm"
-                className="rounded-full px-5 text-foreground bg-secondary"
+                className="rounded-full px-5 text-foreground bg-secondary hover:bg-secondary-hover"
               >
                 <NavLink to="/agendamento">Agendar banho</NavLink>
               </Button>
