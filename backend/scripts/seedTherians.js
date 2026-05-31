@@ -75,8 +75,7 @@ const therians = [
     idade: 24,
     sexo: "Macho",
     status: true,
-    descricao:
-      "Aparentemente sou humano. Erro de classificacao, eu imagino.",
+    descricao: "Aparentemente sou humano. Erro de classificacao, eu imagino.",
     cidade: "Sao Paulo",
     estado: "SP",
     fotoPerfil: "https://example.com/therians/tobias.png",
