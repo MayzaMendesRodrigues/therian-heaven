@@ -35,7 +35,7 @@ function normalizeTherian(therian, index) {
     size: therian.escolaridade || "Nao informado",
     trait: therian.theriotype,
     local: `${therian.cidade}, ${therian.estado}`,
-    img: therianImages[imageIndex],
+    img: therian.fotoPerfil || therianImages[imageIndex],
     bio: therian.descricao,
     castrado: therian.castrado,
     vermifugado: !therian.necessidadesEspeciais?.length,

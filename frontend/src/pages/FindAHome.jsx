@@ -12,14 +12,101 @@ import {
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
+import api from "@/utils/Api";
+import { useNavigate } from "react-router-dom";
 
 export default function FindAHome() {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [feedback, setFeedback] = useState(null);
+  const [alimentacao, setAlimentacao] = useState("Carnivoro");
+  const [castrado, setCastrado] = useState(true);
+  const [vermifugado, setVermifugado] = useState(true);
+  const [vacinaAplicada, setVacinaAplicada] = useState(true);
 
-  function handleSubmit(e) {
+  async function handleLoginSubmit(e) {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => setLoading(false), 1500);
+    setFeedback(null);
+
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      const data = await api.login({
+        email: formData.get("email"),
+        password: formData.get("password"),
+      });
+
+      localStorage.setItem("jwt", data.token);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      window.dispatchEvent(new Event("auth:change"));
+
+      setFeedback({ type: "success", message: "Login realizado com sucesso!" });
+    } catch (error) {
+      setFeedback({ type: "error", message: error.message });
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleCadastroSubmit(e) {
+    e.preventDefault();
+    setLoading(true);
+    setFeedback(null);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const vacinaNome = formData.get("vacinaNome");
+    const vacinaData = formData.get("vacinaData");
+
+    const therian = {
+      id: Date.now(),
+      nome: formData.get("nome"),
+      theriotype: formData.get("theriotype"),
+      sexo: formData.get("sexo"),
+      idade: Number(formData.get("idade")),
+      alimentacao,
+      cidade: formData.get("cidade"),
+      estado: formData.get("estado"),
+      fotoPerfil: formData.get("fotoPerfil"),
+      escolaridade: formData.get("escolaridade"),
+      descricao: formData.get("descricao"),
+      castrado,
+      necessidadesEspeciais: formData.get("necessidadesEspeciais")
+        ? formData
+            .get("necessidadesEspeciais")
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean)
+        : [],
+      vacinas:
+        vacinaNome && vacinaData
+          ? [
+              {
+                nome: vacinaNome,
+                data: vacinaData,
+                ano: new Date().getFullYear(),
+                status: vacinaAplicada ? "Aplicada" : "Pendente",
+              },
+            ]
+          : [],
+    };
+
+    try {
+      await api.createTherian(therian);
+      form.reset();
+      setAlimentacao("Carnivoro");
+      setCastrado(true);
+      setVermifugado(true);
+      setVacinaAplicada(true);
+      navigate("/adocao");
+    } catch (error) {
+      setFeedback({ type: "error", message: error.message });
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -34,238 +121,344 @@ export default function FindAHome() {
             me conhecer melhor.
           </p>
 
-          <Tabs defaultValue="signup" className="mt-6">
+          <Tabs
+            defaultValue="signup"
+            className="mt-6"
+            onValueChange={() => setFeedback(null)}
+          >
             <TabsList className="grid grid-cols-2 w-full">
               <TabsTrigger value="signin">Entrar</TabsTrigger>
               <TabsTrigger value="signup">Cadastrar</TabsTrigger>
             </TabsList>
 
             <TabsContent value="signin" className="mt-5">
-              <div className="text-center p-6 border rounded-2xl bg-muted/20 text-sm text-muted-foreground">
-                <TabsContent value="signin" className="mt-5">
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="space-y-1.5">
-                      <Label htmlFor="si-email">E-mail</Label>
-                      <Input
-                        id="si-email"
-                        type="email"
-                        placeholder="seu@email.com"
-                        required
-                      />
-                    </div>
-                    <div className="space-y-1.5">
-                      <Label htmlFor="si-password">Senha</Label>
-                      <Input id="si-password" type="password" required />
-                    </div>
-                    <Button
-                      type="submit"
-                      className="w-full rounded-full"
-                      disabled={loading}
-                    >
-                      {loading ? "Entrando…" : "Entrar"}
-                    </Button>
-                  </form>
-                </TabsContent>
-              </div>
+              <form onSubmit={handleLoginSubmit} className="space-y-4">
+                <div className="space-y-1.5">
+                  <Label htmlFor="si-email">E-mail</Label>
+                  <Input
+                    id="si-email"
+                    name="email"
+                    type="email"
+                    placeholder="seu@email.com"
+                    required
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="si-password">Senha</Label>
+                  <Input
+                    id="si-password"
+                    name="password"
+                    type="password"
+                    required
+                    minLength={8}
+                  />
+                </div>
+                {feedback && (
+                  <p
+                    className={
+                      feedback.type === "success"
+                        ? "text-sm font-medium text-success"
+                        : "text-sm font-medium text-destructive"
+                    }
+                  >
+                    {feedback.message}
+                  </p>
+                )}
+                <Button
+                  type="submit"
+                  className="w-full rounded-full"
+                  disabled={loading}
+                >
+                  {loading ? "Entrando…" : "Entrar"}
+                </Button>
+              </form>
             </TabsContent>
 
-            <TabsContent value="signup" className="mt-5 space-y-5">
-              {/* Nome e Espécie */}
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1.5">
-                  <Label htmlFor="name">Nome do therianZinho</Label>
-                  <Input id="name" placeholder="Ex: Mel" />
+            <TabsContent value="signup" className="mt-5">
+              <form onSubmit={handleCadastroSubmit} className="space-y-5">
+                {/* Nome e Espécie */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="name">Nome do therianZinho</Label>
+                    <Input
+                      id="name"
+                      name="nome"
+                      placeholder="Ex: Mel"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="species">Espécie / Theriotype</Label>
+                    <Input
+                      id="species"
+                      name="theriotype"
+                      placeholder="Ex: Cão, Husky"
+                      required
+                    />
+                  </div>
                 </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="species">Espécie / Theriotype</Label>
-                  <Input id="species" placeholder="Ex: Cão, Husky" />
-                </div>
-              </div>
 
-              {/* Raça e Gênero */}
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1.5">
-                  <Label htmlFor="breed">Raça específica</Label>
-                  <Input id="breed" placeholder="Ex: Vira-lata" />
+                {/* Raça e Gênero */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="breed">Raça específica</Label>
+                    <Input id="breed" name="raca" placeholder="Ex: Vira-lata" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="sex">Gênero / Sexo</Label>
+                    <Input
+                      id="sex"
+                      name="sexo"
+                      placeholder="Ex: Fêmea"
+                      required
+                    />
+                  </div>
                 </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="sex">Gênero / Sexo</Label>
-                  <Input id="sex" placeholder="Ex: Fêmea" />
-                </div>
-              </div>
 
-              {/* Idade, Peso e Porte */}
-              <div className="grid grid-cols-3 gap-2">
-                <div className="space-y-1.5">
-                  <Label htmlFor="age">Idade</Label>
-                  <Input id="age" placeholder="Ex: 54 anos" />
+                {/* Idade, Peso e Porte */}
+                <div className="grid grid-cols-3 gap-2">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="age">Idade</Label>
+                    <Input
+                      id="age"
+                      name="idade"
+                      type="number"
+                      min={0}
+                      placeholder="Ex: 54"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="weight">O seu peso</Label>
+                    <Input id="weight" name="peso" placeholder="Ex: 80 kg" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="size">Porte</Label>
+                    <Select defaultValue="Médio">
+                      <SelectTrigger id="size">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Pequeno">Pequeno</SelectItem>
+                        <SelectItem value="Médio">Médio</SelectItem>
+                        <SelectItem value="Grande">Grande</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
+
+                {/* Hábito Alimentar */}
                 <div className="space-y-1.5">
-                  <Label htmlFor="weight">O seu peso</Label>
-                  <Input id="weight" placeholder="Ex: 80 kg" />
-                </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="size">Porte</Label>
-                  <Select defaultValue="Médio">
-                    <SelectTrigger id="size">
+                  <Label htmlFor="habitoAlimentar">Hábito Alimentar</Label>
+                  <Select value={alimentacao} onValueChange={setAlimentacao}>
+                    <SelectTrigger id="habitoAlimentar">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="Pequeno">Pequeno</SelectItem>
-                      <SelectItem value="Médio">Médio</SelectItem>
-                      <SelectItem value="Grande">Grande</SelectItem>
+                      <SelectItem value="Carnivoro">🥩 Carnívoro</SelectItem>
+                      <SelectItem value="Vegetariano">
+                        🥦 Vegetariano
+                      </SelectItem>
+                      <SelectItem value="Onivoro">🍳 Onívoro</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
-              </div>
 
-              {/* Hábito Alimentar */}
-              <div className="space-y-1.5">
-                <Label htmlFor="habitoAlimentar">Hábito Alimentar</Label>
-                <Select defaultValue="Carnívoro">
-                  <SelectTrigger id="habitoAlimentar">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Carnívoro">🥩 Carnívoro</SelectItem>
-                    <SelectItem value="Vegetariano">🥦 Vegetariano</SelectItem>
-                    <SelectItem value="Onívoro">🍳 Onívoro</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Localização */}
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1.5">
-                  <Label htmlFor="cidade">Cidade</Label>
-                  <Input id="cidade" placeholder="Ex: Campinas" />
-                </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="estado">Estado (UF)</Label>
-                  <Input id="estado" placeholder="SP" maxLength={2} />
-                </div>
-              </div>
-
-              {/* Imagem */}
-              <div className="space-y-1.5">
-                <Label htmlFor="img">URL da Imagem / Foto de Perfil</Label>
-                <Input
-                  id="img"
-                  type="url"
-                  placeholder="https://images.unsplash.com/..."
-                />
-              </div>
-
-              {/* Necessidades Básicas e Especiais */}
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1.5">
-                  <Label htmlFor="necessidadesBasicas">
-                    Necessidades Básicas
-                  </Label>
-                  <Input
-                    id="necessidadesBasicas"
-                    placeholder="Ex: Preferencia por guarana Jesus ..."
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="necessidadesEspeciais">
-                    Necessidades Especiais
-                  </Label>
-                  <Input
-                    id="necessidadesEspeciais"
-                    placeholder="Que o meu lar tenha wifi"
-                  />
-                </div>
-              </div>
-
-              {/* Clínico, Resgate e Adestramento */}
-              <div className="p-4 border border-dashed rounded-2xl bg-muted/10 space-y-3">
-                <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block">
-                  Ficha Clínica e Histórico
-                </span>
-                <div className="grid grid-cols-3 gap-2">
-                  <div className="space-y-1">
-                    <Label htmlFor="microchip" className="text-xs">
-                      Microchip
-                    </Label>
-                    <Input id="microchip" placeholder="#123" />
+                {/* Localização */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="cidade">Cidade</Label>
+                    <Input
+                      id="cidade"
+                      name="cidade"
+                      placeholder="Ex: Campinas"
+                      required
+                    />
                   </div>
-                  <div className="space-y-1">
-                    <Label htmlFor="resgate" className="text-xs">
-                      Resgatado em
-                    </Label>
-                    <Input id="resgate" placeholder="Ex: Mai/26" />
-                  </div>
-                  <div className="space-y-1">
-                    <Label htmlFor="escolaridade" className="text-xs">
-                      Treinamento
-                    </Label>
-                    <Input id="escolaridade" placeholder="Adestrado" />
+                  <div className="space-y-1.5">
+                    <Label htmlFor="estado">Estado (UF)</Label>
+                    <Input
+                      id="estado"
+                      name="estado"
+                      placeholder="SP"
+                      maxLength={2}
+                      required
+                    />
                   </div>
                 </div>
-                <div className="space-y-1">
-                  <Label htmlFor="motivoDoResgate" className="text-xs">
-                    Motivo do Resgate / Histórico de Vida
-                  </Label>
+
+                {/* Imagem */}
+                <div className="space-y-1.5">
+                  <Label htmlFor="img">URL da Imagem / Foto de Perfil</Label>
                   <Input
-                    id="motivoDoResgate"
-                    placeholder="Ex: Abandono nas ruas"
+                    id="img"
+                    name="fotoPerfil"
+                    type="url"
+                    placeholder="https://images.unsplash.com/..."
+                    required
                   />
                 </div>
-                <div className="flex gap-4 pt-1">
+
+                {/* Necessidades Básicas e Especiais */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="necessidadesBasicas">
+                      Necessidades Básicas
+                    </Label>
+                    <Input
+                      id="necessidadesBasicas"
+                      name="necessidadesBasicas"
+                      placeholder="Ex: Preferencia por guarana Jesus ..."
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="necessidadesEspeciais">
+                      Necessidades Especiais
+                    </Label>
+                    <Input
+                      id="necessidadesEspeciais"
+                      name="necessidadesEspeciais"
+                      placeholder="Que o meu lar tenha wifi"
+                    />
+                  </div>
+                </div>
+
+                {/* Clínico, Resgate e Adestramento */}
+                <div className="p-4 border border-dashed rounded-2xl bg-muted/10 space-y-3">
+                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block">
+                    Ficha Clínica e Histórico
+                  </span>
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className="space-y-1">
+                      <Label htmlFor="microchip" className="text-xs">
+                        Microchip
+                      </Label>
+                      <Input
+                        id="microchip"
+                        name="microchip"
+                        placeholder="#123"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <Label htmlFor="resgate" className="text-xs">
+                        Resgatado em
+                      </Label>
+                      <Input
+                        id="resgate"
+                        name="resgate"
+                        placeholder="Ex: Mai/26"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <Label htmlFor="escolaridade" className="text-xs">
+                        Treinamento
+                      </Label>
+                      <Input
+                        id="escolaridade"
+                        name="escolaridade"
+                        placeholder="Adestrado"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-1">
+                    <Label htmlFor="motivoDoResgate" className="text-xs">
+                      Motivo do Resgate / Histórico de Vida
+                    </Label>
+                    <Input
+                      id="motivoDoResgate"
+                      name="motivoDoResgate"
+                      placeholder="Ex: Abandono nas ruas"
+                    />
+                  </div>
+                  <div className="flex gap-4 pt-1">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox
+                        id="castrado"
+                        checked={castrado}
+                        onCheckedChange={setCastrado}
+                      />
+                      <Label htmlFor="castrado" className="text-xs font-medium">
+                        Castrado
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox
+                        id="vermifugado"
+                        checked={vermifugado}
+                        onCheckedChange={setVermifugado}
+                      />
+                      <Label
+                        htmlFor="vermifugado"
+                        className="text-xs font-medium"
+                      >
+                        Vermifugado
+                      </Label>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Carteira de Vacinação */}
+                <div className="p-4 border rounded-2xl bg-primary/5 space-y-3">
+                  <span className="text-xs font-semibold text-primary uppercase tracking-wider block">
+                    Carteira de Vacinação
+                  </span>
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="space-y-1">
+                      <Label className="text-xs">Nome da Vacina</Label>
+                      <Input
+                        name="vacinaNome"
+                        placeholder="Ex: Múltipla V10"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <Label className="text-xs">Data de Aplicação</Label>
+                      <Input name="vacinaData" placeholder="Ex: 12/02/2026" />
+                    </div>
+                  </div>
                   <div className="flex items-center space-x-2">
-                    <Checkbox id="castrado" defaultChecked />
-                    <Label htmlFor="castrado" className="text-xs font-medium">
-                      Castrado
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Checkbox id="vermifugado" defaultChecked />
-                    <Label
-                      htmlFor="vermifugado"
-                      className="text-xs font-medium"
-                    >
-                      Vermifugado
+                    <Checkbox
+                      id="v-aplicada"
+                      checked={vacinaAplicada}
+                      onCheckedChange={setVacinaAplicada}
+                    />
+                    <Label htmlFor="v-aplicada" className="text-xs font-medium">
+                      Vacina já Aplicada
                     </Label>
                   </div>
                 </div>
-              </div>
 
-              {/* Carteira de Vacinação */}
-              <div className="p-4 border rounded-2xl bg-primary/5 space-y-3">
-                <span className="text-xs font-semibold text-primary uppercase tracking-wider block">
-                  Carteira de Vacinação
-                </span>
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="space-y-1">
-                    <Label className="text-xs">Nome da Vacina</Label>
-                    <Input placeholder="Ex: Múltipla V10" />
-                  </div>
-                  <div className="space-y-1">
-                    <Label className="text-xs">Data de Aplicação</Label>
-                    <Input placeholder="Ex: 12/02/2026" />
-                  </div>
+                {/* Biografia / Descrição */}
+                <div className="space-y-1.5">
+                  <Label htmlFor="bio">Biografia do therianZinho</Label>
+                  <Textarea
+                    id="bio"
+                    name="descricao"
+                    placeholder="Conte a história do therianZinho, traquinagens e comportamento..."
+                    required
+                  />
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="v-aplicada" defaultChecked />
-                  <Label htmlFor="v-aplicada" className="text-xs font-medium">
-                    Vacina já Aplicada
-                  </Label>
-                </div>
-              </div>
 
-              {/* Biografia / Descrição */}
-              <div className="space-y-1.5">
-                <Label htmlFor="bio">Biografia do therianZinho</Label>
-                <Textarea
-                  id="bio"
-                  placeholder="Conte a história do therianZinho, traquinagens e comportamento..."
-                />
-              </div>
+                {feedback && (
+                  <p
+                    className={
+                      feedback.type === "success"
+                        ? "text-sm font-medium text-success"
+                        : "text-sm font-medium text-destructive"
+                    }
+                  >
+                    {feedback.message}
+                  </p>
+                )}
 
-              <Button type="button" className="w-full rounded-full mt-2">
-                Salvar Cadastro 🐾
-              </Button>
+                <Button
+                  type="submit"
+                  className="w-full rounded-full mt-2"
+                  disabled={loading}
+                >
+                  {loading ? "Salvando…" : "Salvar Cadastro 🐾"}
+                </Button>
+              </form>
             </TabsContent>
           </Tabs>
         </div>

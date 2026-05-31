@@ -48,6 +48,19 @@ class Api {
     }).then(this._checkResponse);
   }
 
+  createTherian(therian) {
+    const token = localStorage.getItem("jwt") || localStorage.getItem("token");
+
+    return fetch(`${this._baseUrl}/therians`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+      body: JSON.stringify(therian),
+    }).then(this._checkResponse);
+  }
+
   getTherians() {
     return fetch(`${this._baseUrl}/therians`).then(this._checkResponse);
   }

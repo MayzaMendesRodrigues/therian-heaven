@@ -90,7 +90,7 @@ const therianSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    enum: ["Vegetariano", "Vegano", "Carnivoro"],
+    enum: ["Vegetariano", "Vegano", "Carnivoro", "Onivoro"],
   },
   castrado: {
     type: Boolean,
