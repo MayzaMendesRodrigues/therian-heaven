@@ -1,14 +1,23 @@
 ﻿# 🐾 Therian Heaven
 
-> *"Um lar para quem late, mia, ruge e às vezes também paga boleto."*
+> _"Um lar para quem late, mia, ruge e às vezes também paga boleto."_
 
 ---
+
+## Live Demo
+
+🔗 https://therian-heaven.vercel.app/
+
+## Backend API
+
+🔗 https://therian-heaven.onrender.com
 
 ## O que é isso aqui?
 
 Therian Heaven é uma plataforma full-stack de adoção e cuidados para **Therians** — pets com personalidade, histórias únicas e às vezes necessidades especiais que o petshop da esquina simplesmente não está preparado para lidar.
 
 Aqui você pode:
+
 - **Adotar** um companheiro peludo (ou escamoso, ou emplumado — sem julgamentos)
 - **Agendar banhos e tosas** porque higiene é importante mesmo pra quem vive na lama
 - **Cadastrar seu Therian** para encontrar um lar novo (ou pelo menos um humano tolerável)
@@ -17,29 +26,31 @@ Aqui você pode:
 
 ## Stack Tecnológica
 
-*Ou: "por que usamos essas coisas em vez de jQuery"*
+_Ou: "por que usamos essas coisas em vez de jQuery"_
 
 ### Frontend
-| Tecnologia | Versão | Por que? |
-|---|---|---|
-| **React** | 19 | Porque o Vue não foi convidado |
-| **Vite** | 8 | Para o `npm run dev` não levar 40 anos |
-| **TailwindCSS** | 3 | Porque escrever CSS de verdade é sofrimento |
-| **shadcn/ui** | - | Componentes bonitos que fingimos ter feito |
-| **Radix UI** | - | Acessibilidade sem choro |
-| **React Hook Form + Zod** | - | Validação de formulário que funciona de verdade |
-| **React Router DOM** | 7 | SPA que não 404 na cara dura |
-| **Recharts** | - | Gráficos que estão lá... por precaução |
-| **date-fns** | - | Porque `new Date()` sozinho é um pesadelo |
-| **Lucide React** | - | Ícones bonitinhos sem culpa |
+
+| Tecnologia                | Versão | Por que?                                        |
+| ------------------------- | ------ | ----------------------------------------------- |
+| **React**                 | 19     | Porque o Vue não foi convidado                  |
+| **Vite**                  | 8      | Para o `npm run dev` não levar 40 anos          |
+| **TailwindCSS**           | 3      | Porque escrever CSS de verdade é sofrimento     |
+| **shadcn/ui**             | -      | Componentes bonitos que fingimos ter feito      |
+| **Radix UI**              | -      | Acessibilidade sem choro                        |
+| **React Hook Form + Zod** | -      | Validação de formulário que funciona de verdade |
+| **React Router DOM**      | 7      | SPA que não 404 na cara dura                    |
+| **Recharts**              | -      | Gráficos que estão lá... por precaução          |
+| **date-fns**              | -      | Porque `new Date()` sozinho é um pesadelo       |
+| **Lucide React**          | -      | Ícones bonitinhos sem culpa                     |
 
 ### Backend
-| Tecnologia | Versão | Por que? |
-|---|---|---|
-| **Node.js + Express** | - | API REST que faz o trabalho sujo |
-| **MongoDB + Mongoose** | - | Banco que aceita schemas flexíveis como a nossa sanidade |
-| **JWT** | - | Autenticação sem sessão no servidor (modernos demais) |
-| **CORS** | - | Para o browser parar de reclamar |
+
+| Tecnologia             | Versão | Por que?                                                 |
+| ---------------------- | ------ | -------------------------------------------------------- |
+| **Node.js + Express**  | -      | API REST que faz o trabalho sujo                         |
+| **MongoDB + Mongoose** | -      | Banco que aceita schemas flexíveis como a nossa sanidade |
+| **JWT**                | -      | Autenticação sem sessão no servidor (modernos demais)    |
+| **CORS**               | -      | Para o browser parar de reclamar                         |
 
 ---
 
@@ -161,36 +172,39 @@ therian-heaven/
 
 ### Públicas (sem autenticação, pra quem ainda não confia)
 
-| Método | Rota | Descrição |
-|---|---|---|
-| `GET` | `/` | Servidor vivo? Sim. |
-| `GET` | `/health` | Health check |
-| `POST` | `/login` | Entrar na plataforma |
-| `GET` | `/therians` | Listar todos os pets |
-| `GET` | `/therians/:id` | Ver um pet específico |
+| Método | Rota            | Descrição             |
+| ------ | --------------- | --------------------- |
+| `GET`  | `/`             | Servidor vivo? Sim.   |
+| `GET`  | `/health`       | Health check          |
+| `POST` | `/login`        | Entrar na plataforma  |
+| `GET`  | `/therians`     | Listar todos os pets  |
+| `GET`  | `/therians/:id` | Ver um pet específico |
 
 ### Protegidas (JWT obrigatório, sem desculpas)
 
-| Método | Rota | Descrição |
-|---|---|---|
-| `POST` | `/users` | Criar conta |
-| `POST` | `/therians` | Cadastrar um pet |
-| `PUT` | `/therians/:id` | Atualizar pet |
+| Método   | Rota            | Descrição              |
+| -------- | --------------- | ---------------------- |
+| `POST`   | `/users`        | Criar conta            |
+| `POST`   | `/therians`     | Cadastrar um pet       |
+| `PUT`    | `/therians/:id` | Atualizar pet          |
 | `DELETE` | `/therians/:id` | Remover pet (tristeza) |
-| `POST` | `/grooming` | Agendar serviço |
-| `GET` | `/grooming` | Listar agendamentos |
+| `POST`   | `/grooming`     | Agendar serviço        |
+| `GET`    | `/grooming`     | Listar agendamentos    |
 
 ---
 
 ## Funcionalidades
 
 ### Adoção
+
 - Galeria de pets disponíveis
 - Modal com ficha completa: nome, espécie, idade, peso, dieta, histórico de vacinas...
 - Dono pode remover o próprio cadastro (autonomia total)
 
 ### Agendamento de Serviços
+
 Escolha entre:
+
 - **Banho** — R$ 70
 - **Tosa** — R$ 90
 - **Hidratação** — R$ 110
@@ -199,7 +213,9 @@ Escolha entre:
 Horários disponíveis: 09:00 às 18:00 (o petshop precisa dormir).
 
 ### Cadastro de Therians
+
 Formulário completo com:
+
 - Informações básicas (nome, espécie/theriotype, idade, sexo, peso)
 - Localização (cidade, estado)
 - Dieta (Carnívoro, Vegetariano, Vegano, Onívoro)
@@ -223,12 +239,14 @@ Formulário completo com:
 ## Scripts Disponíveis
 
 ### Backend
+
 ```bash
 npm run dev            # Inicia o servidor
 npm run seed:therians  # Popula o banco com pets
 ```
 
 ### Frontend
+
 ```bash
 npm run dev      # Inicia o servidor de desenvolvimento
 npm run build    # Build para produção
@@ -241,6 +259,7 @@ npm run preview  # Preview do build de produção
 ## Variáveis de Ambiente
 
 ### Backend (`backend/.env`)
+
 ```env
 MONGODB_URI=   # String de conexão MongoDB
 PORT=4000      # Porta do servidor (padrão: 4000)
@@ -248,6 +267,7 @@ JWT_SECRET=    # Segredo para assinar os tokens
 ```
 
 ### Frontend (`frontend/.env`)
+
 ```env
 VITE_API_URL=http://localhost:4000   # URL da API
 ```
@@ -274,7 +294,6 @@ Nenhum animal foi prejudicado na criação desta plataforma. Todos os Therians c
 
 As pessoas responsáveis por isso tudo — vá pedir um petisco (vulgo biscoito) ou deixar um carinho no nosso LinkedIn:
 
-
 - 🐾 **Mayza Rodrigues**  
   ↳ https://www.linkedin.com/in/mayza-ynara-mendes-rodrigues/
 
@@ -290,8 +309,6 @@ As pessoas responsáveis por isso tudo — vá pedir um petisco (vulgo biscoito)
 - 🐾 **Marcela Couto**  
   ↳ https://www.linkedin.com/in/marcelacouto
 
-
-
 Cinco pessoas que decidiram, em sã consciência, construir um lar digital para Therians. Aplausos.
 
 ---
@@ -300,7 +317,6 @@ Cinco pessoas que decidiram, em sã consciência, construir um lar digital para 
 
 ---
 
-
 ---
 
-*Feito com carinho, no Hacka da CodeCon* 🐾
+_Feito com carinho, no Hacka da CodeCon_ 🐾
