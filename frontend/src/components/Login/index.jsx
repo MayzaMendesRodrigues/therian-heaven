@@ -138,7 +138,9 @@ export default function Login() {
                     onChange={(e) => validatePassword(e, setPasswordError)}
                   />
                   {passwordError && (
-                    <p className="text-sm text-destructive">{passwordError}</p>
+                    <p className="text-sm text  -destructive">
+                      {passwordError}
+                    </p>
                   )}
                 </div>
                 {feedback && (

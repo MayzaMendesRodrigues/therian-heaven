@@ -12,9 +12,51 @@ import {
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  validateEmail,
+  validatePassword,
+  validatePetName,
+  validateSpecies,
+  validateBreed,
+  validateGender,
+  validateAge,
+  validateWeight,
+  validateCity,
+  validateState,
+  validateProfilePicture,
+  validateBasicNeeds,
+  validateSpecialNeeds,
+  validateMicrochip,
+  validateRescue,
+  validateTraining,
+  validateRescueReason,
+  validateVaccine,
+  validateApplicationDate,
+  validateBio,
+} from "../validation/validators";
 
 export default function FindAHome() {
   const [loading, setLoading] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [petNameError, setPetNameError] = useState("");
+  const [speciesError, setSpeciesError] = useState("");
+  const [breedError, setBreedError] = useState("");
+  const [genderError, setGenderError] = useState("");
+  const [ageError, setAgeError] = useState("");
+  const [weightError, setWeightError] = useState("");
+  const [cityError, setCityError] = useState("");
+  const [stateError, setStateError] = useState("");
+  const [profilePictureError, setProfilePictureError] = useState("");
+  const [basicNeedsError, setBasicNeedsError] = useState("");
+  const [specialNeedsError, setSpecialNeedsError] = useState("");
+  const [microchipError, setMicrochipError] = useState("");
+  const [rescueError, setRescueError] = useState("");
+  const [trainingError, setTrainingError] = useState("");
+  const [rescueReasonError, setRescueReasonError] = useState("");
+  const [vaccineError, setVaccineError] = useState("");
+  const [applicationDateError, setApplicationDateError] = useState("");
+  const [bioError, setBioError] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -51,11 +93,27 @@ export default function FindAHome() {
                         type="email"
                         placeholder="seu@email.com"
                         required
+                        onChange={(e) => validateEmail(e, setEmailError)}
                       />
+                      {emailError && (
+                        <p className="text-sm text-destructive">{emailError}</p>
+                      )}
                     </div>
                     <div className="space-y-1.5">
                       <Label htmlFor="si-password">Senha</Label>
-                      <Input id="si-password" type="password" required />
+                      <Input
+                        id="si-password"
+                        type="password"
+                        required
+                        placeholder="********"
+                        minLength={8}
+                        onChange={(e) => validatePassword(e, setPasswordError)}
+                      />
+                      {passwordError && (
+                        <p className="text-sm text  -destructive">
+                          {passwordError}
+                        </p>
+                      )}
                     </div>
                     <Button
                       type="submit"
@@ -74,11 +132,31 @@ export default function FindAHome() {
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1.5">
                   <Label htmlFor="name">Nome do therianZinho</Label>
-                  <Input id="name" placeholder="Ex: Mel" />
+                  <Input
+                    id="name"
+                    placeholder="Ex: Mel"
+                    type="text"
+                    minLength={2}
+                    required
+                    onChange={(e) => validatePetName(e, setPetNameError)}
+                  />
+                  {petNameError && (
+                    <p className="text-sm text-destructive">{petNameError}</p>
+                  )}
                 </div>
                 <div className="space-y-1.5">
                   <Label htmlFor="species">Espécie / Theriotype</Label>
-                  <Input id="species" placeholder="Ex: Cão, Husky" />
+                  <Input
+                    id="species"
+                    placeholder="Ex: Cão, Husky"
+                    required
+                    type="text"
+                    minLength={2}
+                    onChange={(e) => validateSpecies(e, setSpeciesError)}
+                  />
+                  {speciesError && (
+                    <p className="text-sm text-destructive">{speciesError}</p>
+                  )}
                 </div>
               </div>
 
@@ -86,11 +164,33 @@ export default function FindAHome() {
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1.5">
                   <Label htmlFor="breed">Raça específica</Label>
-                  <Input id="breed" placeholder="Ex: Vira-lata" />
+                  <Input
+                    id="breed"
+                    placeholder="Ex: Vira-lata"
+                    required
+                    minLength={2}
+                    maxLength={50}
+                    type="text"
+                    onChange={(e) => validateBreed(e, setBreedError)}
+                  />
+                  {breedError && (
+                    <p className="text-sm text-destructive">{breedError}</p>
+                  )}
                 </div>
                 <div className="space-y-1.5">
                   <Label htmlFor="sex">Gênero / Sexo</Label>
-                  <Input id="sex" placeholder="Ex: Fêmea" />
+                  <Input
+                    id="sex"
+                    placeholder="Ex: Fêmea"
+                    required
+                    minLength={5}
+                    maxLength={50}
+                    type="text"
+                    onChange={(e) => validateGender(e, setGenderError)}
+                  />
+                  {genderError && (
+                    <p className="text-sm text-destructive">{genderError}</p>
+                  )}
                 </div>
               </div>
 
@@ -98,11 +198,33 @@ export default function FindAHome() {
               <div className="grid grid-cols-3 gap-2">
                 <div className="space-y-1.5">
                   <Label htmlFor="age">Idade</Label>
-                  <Input id="age" placeholder="Ex: 54 anos" />
+                  <Input
+                    id="age"
+                    required
+                    type="number"
+                    min={0}
+                    max={200}
+                    placeholder="Ex: 54"
+                    onChange={(e) => validateAge(e, setAgeError)}
+                  />
+                  {ageError && (
+                    <p className="text-sm text-destructive">{ageError}</p>
+                  )}
                 </div>
                 <div className="space-y-1.5">
                   <Label htmlFor="weight">O seu peso</Label>
-                  <Input id="weight" placeholder="Ex: 80 kg" />
+                  <Input
+                    id="weight"
+                    required
+                    type="number"
+                    min={0}
+                    max={500}
+                    placeholder="Ex: 80"
+                    onChange={(e) => validateWeight(e, setWeightError)}
+                  />
+                  {weightError && (
+                    <p className="text-sm text-destructive">{weightError}</p>
+                  )}
                 </div>
                 <div className="space-y-1.5">
                   <Label htmlFor="size">Porte</Label>
@@ -138,11 +260,32 @@ export default function FindAHome() {
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1.5">
                   <Label htmlFor="cidade">Cidade</Label>
-                  <Input id="cidade" placeholder="Ex: Campinas" />
+                  <Input
+                    id="cidade"
+                    placeholder="Ex: Campinas"
+                    type="text"
+                    minLength={2}
+                    required
+                    onChange={(e) => validateCity(e, setCityError)}
+                  />
+                  {cityError && (
+                    <p className="text-sm text-destructive">{cityError}</p>
+                  )}
                 </div>
                 <div className="space-y-1.5">
                   <Label htmlFor="estado">Estado (UF)</Label>
-                  <Input id="estado" placeholder="SP" maxLength={2} />
+                  <Input
+                    id="estado"
+                    placeholder="SP"
+                    minLength={2}
+                    maxLength={2}
+                    type="text"
+                    required
+                    onChange={(e) => validateState(e, setStateError)}
+                  />
+                  {stateError && (
+                    <p className="text-sm text-destructive">{stateError}</p>
+                  )}
                 </div>
               </div>
 
@@ -153,7 +296,16 @@ export default function FindAHome() {
                   id="img"
                   type="url"
                   placeholder="https://images.unsplash.com/..."
+                  required
+                  onChange={(e) =>
+                    validateProfilePicture(e, setProfilePictureError)
+                  }
                 />
+                {profilePictureError && (
+                  <p className="text-sm text-destructive">
+                    {profilePictureError}
+                  </p>
+                )}
               </div>
 
               {/* Necessidades Básicas e Especiais */}
@@ -165,7 +317,16 @@ export default function FindAHome() {
                   <Input
                     id="necessidadesBasicas"
                     placeholder="Ex: Preferencia por guarana Jesus ..."
+                    required
+                    type="text"
+                    minLength={2}
+                    onChange={(e) => validateBasicNeeds(e, setBasicNeedsError)}
                   />
+                  {basicNeedsError && (
+                    <p className="text-sm text-destructive">
+                      {basicNeedsError}
+                    </p>
+                  )}
                 </div>
                 <div className="space-y-1.5">
                   <Label htmlFor="necessidadesEspeciais">
@@ -174,7 +335,18 @@ export default function FindAHome() {
                   <Input
                     id="necessidadesEspeciais"
                     placeholder="Que o meu lar tenha wifi"
+                    required
+                    type="text"
+                    minLength={2}
+                    onChange={(e) =>
+                      validateSpecialNeeds(e, setSpecialNeedsError)
+                    }
                   />
+                  {specialNeedsError && (
+                    <p className="text-sm text-destructive">
+                      {specialNeedsError}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -188,19 +360,51 @@ export default function FindAHome() {
                     <Label htmlFor="microchip" className="text-xs">
                       Microchip
                     </Label>
-                    <Input id="microchip" placeholder="#123" />
+                    <Input
+                      id="microchip"
+                      placeholder="#123"
+                      type="text"
+                      required
+                      onChange={(e) => validateMicrochip(e, setMicrochipError)}
+                    />
+                    {microchipError && (
+                      <p className="text-sm text-destructive">
+                        {microchipError}
+                      </p>
+                    )}
                   </div>
                   <div className="space-y-1">
                     <Label htmlFor="resgate" className="text-xs">
                       Resgatado em
                     </Label>
-                    <Input id="resgate" placeholder="Ex: Mai/26" />
+                    <Input
+                      id="resgate"
+                      placeholder="Ex: Mai/26"
+                      type="date"
+                      required
+                      onChange={(e) => validateRescue(e, setRescueError)}
+                    />
+                    {rescueError && (
+                      <p className="text-sm text-destructive">{rescueError}</p>
+                    )}
                   </div>
                   <div className="space-y-1">
                     <Label htmlFor="escolaridade" className="text-xs">
                       Treinamento
                     </Label>
-                    <Input id="escolaridade" placeholder="Adestrado" />
+                    <Input
+                      id="escolaridade"
+                      placeholder="Adestrado"
+                      type="text"
+                      required
+                      minLength={2}
+                      onChange={(e) => validateTraining(e, setTrainingError)}
+                    />
+                    {trainingError && (
+                      <p className="text-sm text-destructive">
+                        {trainingError}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div className="space-y-1">
@@ -210,7 +414,18 @@ export default function FindAHome() {
                   <Input
                     id="motivoDoResgate"
                     placeholder="Ex: Abandono nas ruas"
+                    type="text"
+                    required
+                    minLength={2}
+                    onChange={(e) =>
+                      validateRescueReason(e, setRescueReasonError)
+                    }
                   />
+                  {rescueReasonError && (
+                    <p className="text-sm text-destructive">
+                      {rescueReasonError}
+                    </p>
+                  )}
                 </div>
                 <div className="flex gap-4 pt-1">
                   <div className="flex items-center space-x-2">
@@ -239,11 +454,32 @@ export default function FindAHome() {
                 <div className="grid grid-cols-2 gap-2">
                   <div className="space-y-1">
                     <Label className="text-xs">Nome da Vacina</Label>
-                    <Input placeholder="Ex: Múltipla V10" />
+                    <Input
+                      placeholder="Ex: Múltipla V10"
+                      type="text"
+                      required
+                      minLength={2}
+                      onChange={(e) => validateVaccine(e, setVaccineError)}
+                    />
+                    {vaccineError && (
+                      <p className="text-sm text-destructive">{vaccineError}</p>
+                    )}
                   </div>
                   <div className="space-y-1">
                     <Label className="text-xs">Data de Aplicação</Label>
-                    <Input placeholder="Ex: 12/02/2026" />
+                    <Input
+                      placeholder="Ex: 12/02/2026"
+                      type="date"
+                      required
+                      onChange={(e) =>
+                        validateApplicationDate(e, setApplicationDateError)
+                      }
+                    />
+                    {applicationDateError && (
+                      <p className="text-sm text-destructive">
+                        {applicationDateError}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -260,7 +496,13 @@ export default function FindAHome() {
                 <Textarea
                   id="bio"
                   placeholder="Conte a história do therianZinho, traquinagens e comportamento..."
+                  required
+                  minLength={10}
+                  onChange={(e) => validateBio(e, setBioError)}
                 />
+                {bioError && (
+                  <p className="text-sm text-destructive">{bioError}</p>
+                )}
               </div>
 
               <Button type="button" className="w-full rounded-full mt-2">
