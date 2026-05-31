@@ -1,3 +1,5 @@
+import therianLogo from "@/assets/therian logo.png";
+
 export default function index() {
   return (
     <footer
@@ -7,8 +9,12 @@ export default function index() {
       <div className="mx-auto max-w-7xl px-6 py-14 grid gap-10 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2 font-display font-bold text-lg">
-            <span className="grid place-items-center h-9 w-9 rounded-full bg-primary text-primary-foreground">
-              {/* <PawPrint className="h-4 w-4" /> */}
+            <span className="grid place-items-center h-9 w-9 rounded-full bg-primary text-primary-foreground overflow-hidden">
+              <img
+                src={therianLogo}
+                alt="Therian Heaven"
+                className="h-full w-full object-cover"
+              />
             </span>
             Therian Haven
           </div>
