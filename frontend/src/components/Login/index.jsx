@@ -13,7 +13,8 @@ export default function Login() {
   const [nameError, setNameError] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [cityError, setCityError] = useState("");
-  // const [adressError, setAdressError] = useState("");
+  const [adressError, setAdressError] = useState("");
+  const [activeTab, setActiveTab] = useState("signin");
 
   //validação do nome:
   function validateName(e) {
@@ -50,7 +51,16 @@ export default function Login() {
     }
   }
 
-  //validação do endereço
+  //validação do endereço:
+  function validateAdress(e) {
+    const input = e.target;
+
+    if (input.validity.tooShort) {
+      setAdressError("Digite um endereço válido");
+    } else {
+      setAdressError("");
+    }
+  }
 
   async function handleSigninSubmit(e) {
     e.preventDefault();
@@ -108,8 +118,9 @@ export default function Login() {
       form.reset();
       setFeedback({
         type: "success",
-        message: "Conta criada com sucesso! Usuario salvo no banco de dados.",
+        message: "Conta criada com sucesso! Faça login para continuar.",
       });
+      setActiveTab("signin");
     } catch (error) {
       setFeedback({
         type: "error",
@@ -131,7 +142,7 @@ export default function Login() {
             Entre ou crie uma conta para enviar pedidos de adoção.
           </p>
 
-          <Tabs defaultValue="signin" className="mt-6">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-6">
             <TabsList className="grid grid-cols-2 w-full">
               <TabsTrigger value="signin">Entrar</TabsTrigger>
               <TabsTrigger value="signup">Cadastrar</TabsTrigger>
@@ -233,7 +244,7 @@ export default function Login() {
                   </div>
                 </div>
 
-                {/* <div className="space-y-1.5">
+                <div className="space-y-1.5">
                   <Label htmlFor="su-address">Endereço</Label>
                   <Input
                     id="su-address"
@@ -247,7 +258,7 @@ export default function Login() {
                   {adressError && (
                     <p className="text-sm text-destructive">{adressError}</p>
                   )}
-                </div> */}
+                </div>
 
                 <div className="space-y-1.5">
                   <Label htmlFor="su-email">E-mail</Label>
