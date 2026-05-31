@@ -22,12 +22,6 @@ import {
 } from "@/components/ui/dialog";
 import api from "@/utils/Api";
 import { Subtitle } from "@/components/ui/subtitle";
-import {
-  validatePetName,
-  validateBreed,
-  validateTutorName,
-  validatePhone,
-} from "../validation/validators";
 
 const servicos = [
   { id: "banho", icon: Bath, nome: "Banho", duracao: "45 min", preco: 70 },
