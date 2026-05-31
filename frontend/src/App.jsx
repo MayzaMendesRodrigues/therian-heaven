@@ -5,8 +5,14 @@ import Roots from "./pages/Root";
 import Home from "./pages/Home";
 import FindAHome from "./pages/FindAHome";
 import Appointment from "./pages/Appointment";
+import { useEffect } from "react";
+import { applyRandomTheme } from "@/components/ThemeSwitcher";
 
 function App() {
+  useEffect(() => {
+    applyRandomTheme();
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>

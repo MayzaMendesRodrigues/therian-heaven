@@ -22,136 +22,169 @@ body {
   --radius: 1rem;
 
   /* ==================================================
-     BASE DA INTERFACE
+     SISTEMA DE CORES DINÂMICO HSL
+     
+     Apenas o Hue muda dinamicamente.
+     Saturation e Lightness são fixas para cada variável.
+     Isso preserva a identidade visual original.
   ================================================== */
 
-  /* Cor principal do fundo da aplicação */
-  --background: #0d1117;
+  /* ─────────────────────────────────────────────────
+     VARIÁVEIS HUE - ALTERE AQUI PARA MUDAR O TEMA
+  ───────────────────────────────────────────────────── */
+  
+  /* Hue primário: 339 (rosa original) */
+  /* Altere para: 120 (verde), 270 (roxo), 220 (azul) */
+  --hue-primary: 339;
 
-  /* Cor principal dos textos */
+  /* Hue neutro: 216 (azul-cinzento dos backgrounds) */
+  /* Geralmente mantém o mesmo, mas pode ser alterado */
+  --hue-neutral: 216;
+
+  /* ─────────────────────────────────────────────────
+     BASE DA INTERFACE - FIXA (cores neutras com HSL)
+  ───────────────────────────────────────────────────── */
+
+  /* Cor principal do fundo da aplicação: hsl(216, 28%, 7%) */
+  --background: hsl(var(--hue-neutral), 28%, 7%);
+
+  /* Cor principal dos textos: FIXA */
   --foreground: #f8fafc;
 
-  /* Fundo de cards, seções e containers */
-  --card: #151b23;
+  /* Fundo de cards, seções e containers: hsl(214, 25%, 11%) */
+  --card: hsl(var(--hue-neutral), 25%, 11%);
 
-  /* Texto exibido dentro de cards */
+  /* Texto exibido dentro de cards: FIXA */
   --card-foreground: #f8fafc;
 
-  /* Fundo de dropdowns, menus e popovers */
-  --popover: #151b23;
+  /* Fundo de dropdowns, menus e popovers: hsl(214, 25%, 11%) */
+  --popover: hsl(var(--hue-neutral), 25%, 11%);
 
-  /* Texto exibido dentro de popovers */
+  /* Texto exibido dentro de popovers: FIXA */
   --popover-foreground: #f8fafc;
 
-  /* ==================================================
-     IDENTIDADE VISUAL DA MARCA
-  ================================================== */
+  /* ─────────────────────────────────────────────────
+     IDENTIDADE VISUAL DA MARCA - DINÂMICA
+  ───────────────────────────────────────────────────── */
 
   /* CTA principal: Adotar, Entrar, Cadastrar, Salvar */
-  --primary: #ff6b9f;
+  /* Original: hsl(339, 100%, 71%) */
+  --primary: hsl(var(--hue-primary), 100%, 71%);
 
   /* Cor de hover para botões e CTA primário */
-  --primary-hover: #fcc2d6;
+  /* Original: hsl(339, 91%, 87%) - lightness aumenta em 16% */
+  --primary-hover: hsl(var(--hue-primary), 91%, 87%);
 
-  /* Texto exibido sobre a cor principal */
+  /* Texto exibido sobre a cor principal: FIXA */
   --primary-foreground: #ffffff;
 
-  /* ==================================================
-     AÇÕES SECUNDÁRIAS
-  ================================================== */
+  /* ─────────────────────────────────────────────────
+     AÇÕES SECUNDÁRIAS - DINÂMICA
+  ───────────────────────────────────────────────────── */
 
   /* Botões secundários, filtros e ações neutras */
-  --secondary: #1d2633;
-  
-  --secondary-hover: #61748e;
+  /* Original: hsl(215, 28%, 16%) */
+  --secondary: hsl(var(--hue-neutral), 28%, 16%);
 
-  /* Texto exibido sobre a cor secundária */
+  /* Hover secundário: Original hsl(215, 19%, 47%) */
+  /* Mantém hue neutro, mas aumenta lightness em 31% */
+  --secondary-hover: hsl(var(--hue-neutral), 19%, 47%);
+
+  /* Texto exibido sobre a cor secundária: FIXA */
   --secondary-foreground: #f8fafc;
 
-  /* ==================================================
-     DESTAQUES
-  ================================================== */
+  /* ─────────────────────────────────────────────────
+     DESTAQUES - DINÂMICA
+  ───────────────────────────────────────────────────── */
 
   /* Cor para destacar elementos importantes da interface */
-  --accent: #ff6b9f ;
+  /* Original: hsl(339, 100%, 71%) - mesmo que primary */
+  --accent: hsl(var(--hue-primary), 100%, 71%);
 
-  /* Texto exibido sobre elementos destacados */
+  /* Texto exibido sobre elementos destacados: FIXA */
   --accent-foreground: #ffffff;
 
-  /* ==================================================
-     ESTADOS DE SUCESSO
-  ================================================== */
+  /* ─────────────────────────────────────────────────
+     ESTRUTURA DA INTERFACE - DINÂMICA
+  ───────────────────────────────────────────────────── */
 
-  /* Cadastro concluído, adoção aprovada, confirmação */
-  --success: #34d399;
+  /* Bordas de cards, divisores e inputs: hsl(216, 28%, 21%) */
+  --border: hsl(var(--hue-neutral), 28%, 21%);
 
-  /* Texto exibido sobre elementos de sucesso */
-  --success-foreground: #ffffff;
+  /* Fundo padrão de campos de formulário: hsl(214, 25%, 11%) */
+  --input: hsl(var(--hue-neutral), 25%, 11%);
 
-  /* ==================================================
-     ESTADOS DE AVISO
-  ================================================== */
+  /* Cor utilizada em focus rings e acessibilidade: dinâmica */
+  /* Original: hsl(339, 100%, 71%) - mesmo que primary */
+  --ring: hsl(var(--hue-primary), 100%, 71%);
 
-  /* Informações que exigem atenção do usuário */
-  --warning: #fbbf24;
+  /* Fundo de elementos discretos ou desabilitados: hsl(217, 39%, 11%) */
+  --muted: hsl(var(--hue-neutral), 39%, 11%);
 
-  /* Texto exibido sobre elementos de aviso */
-  --warning-foreground: #111827;
+  /* ─────────────────────────────────────────────────
+     TEXTOS SECUNDÁRIOS E NEUTROS - FIXOS
+  ───────────────────────────────────────────────────── */
 
-  /* ==================================================
-     ESTADOS DE ERRO
-  ================================================== */
-
-  /* Exclusão, falha, erro ou ação destrutiva */
-  --destructive: #f87171;
-
-  /* Texto exibido sobre elementos destrutivos */
-  --destructive-foreground: #ffffff;
-
-  /* ==================================================
-     ESTADOS INFORMATIVOS
-  ================================================== */
-
-  /* Dicas, informações e mensagens neutras */
-  --info: #60a5fa;
-
-  /* Texto exibido sobre elementos informativos */
-  --info-foreground: #ffffff;
-
-  /* ==================================================
-     VARIANTES DE ESTADO SUAVE
-  ================================================== */
-
-  /* Estado de sucesso leve para backgrounds e badges */
-  --success-soft: #dcfce7;
-  --success-deep: #166534;
-
-  /* Estado de aviso leve para backgrounds e badges */
-  --warning-soft: #fef3c7;
-  --warning-deep: #92400e;
-
-  /* Estado destrutivo leve para backgrounds e badges */
-  --destructive-soft: #fecaca;
-  --destructive-deep: #991b1b;
-
-  /* ==================================================
-     ESTRUTURA DA INTERFACE
-  ================================================== */
-
-  /* Fundo de elementos discretos ou desabilitados */
-  --muted: #111827;
-
-  /* Texto secundário, legendas e descrições */
+  /* Texto secundário, legendas e descrições: FIXA */
   --muted-foreground: #94a3b8;
 
-  /* Bordas de cards, divisores e inputs */
-  --border: #263244;
+  /* ─────────────────────────────────────────────────
+     ESTADOS DE SUCESSO - FIXOS
+  ───────────────────────────────────────────────────── */
 
-  /* Fundo padrão de campos de formulário */
-  --input: #151b23;
+  /* Cadastro concluído, adoção aprovada, confirmação: FIXA */
+  --success: #34d399;
 
-  /* Cor utilizada em focus rings e acessibilidade */
-  --ring: #ff6b9f;
+  /* Texto exibido sobre elementos de sucesso: FIXA */
+  --success-foreground: #ffffff;
+
+  /* Estado de sucesso leve para backgrounds e badges: FIXA */
+  --success-soft: #dcfce7;
+
+  /* Variante mais profunda de sucesso: FIXA */
+  --success-deep: #166534;
+
+  /* ─────────────────────────────────────────────────
+     ESTADOS DE AVISO - FIXOS
+  ───────────────────────────────────────────────────── */
+
+  /* Informações que exigem atenção do usuário: FIXA */
+  --warning: #fbbf24;
+
+  /* Texto exibido sobre elementos de aviso: FIXA */
+  --warning-foreground: #111827;
+
+  /* Estado de aviso leve para backgrounds e badges: FIXA */
+  --warning-soft: #fef3c7;
+
+  /* Variante mais profunda de aviso: FIXA */
+  --warning-deep: #92400e;
+
+  /* ─────────────────────────────────────────────────
+     ESTADOS DE ERRO - FIXOS
+  ───────────────────────────────────────────────────── */
+
+  /* Exclusão, falha, erro ou ação destrutiva: FIXA */
+  --destructive: #f87171;
+
+  /* Texto exibido sobre elementos destrutivos: FIXA */
+  --destructive-foreground: #ffffff;
+
+  /* Estado destrutivo leve para backgrounds e badges: FIXA */
+  --destructive-soft: #fecaca;
+
+  /* Variante mais profunda de erro: FIXA */
+  --destructive-deep: #991b1b;
+
+  /* ─────────────────────────────────────────────────
+     ESTADOS INFORMATIVOS - FIXOS
+  ───────────────────────────────────────────────────── */
+
+  /* Dicas, informações e mensagens neutras: FIXA */
+  --info: #60a5fa;
+
+  /* Texto exibido sobre elementos informativos: FIXA */
+  --info-foreground: #ffffff;
 
   /* ==================================================
      GRADIENTES
@@ -160,15 +193,15 @@ body {
   /* Gradiente principal para hero sections */
   --gradient-hero: linear-gradient(
     135deg,
-    #1a2230 0%,
-    #0d1117 100%
+    hsl(var(--hue-neutral), 28%, 14%) 0%,
+    hsl(var(--hue-neutral), 28%, 7%) 100%
   );
 
   /* Gradiente suave para seções e áreas de destaque */
   --gradient-soft: linear-gradient(
     180deg,
-    #151b23 0%,
-    #0d1117 100%
+    hsl(var(--hue-neutral), 25%, 11%) 0%,
+    hsl(var(--hue-neutral), 28%, 7%) 100%
   );
 
   /* ==================================================
@@ -178,6 +211,10 @@ body {
   /* Sombra padrão para cards, modais e elementos elevados */
   --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
+
+/* ==================================================
+   REGRAS DE HOVER
+================================================== */
 
 /* Botões primários com hover levemente mais claro */
 .bg-primary:hover {
@@ -189,3 +226,4 @@ body {
    background-color: var(--secondary-hover);
    color: var(--secondary-foreground);
 }
+

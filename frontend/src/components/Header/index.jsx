@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 import therianLogo from "@/assets/therian logo.png";
 import { LogOut } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -115,7 +116,9 @@ export default function Header() {
               </NavLink>
             </nav>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+              <ThemeSwitcher />
+
               {user ? (
                 <Button
                   type="button"
@@ -124,8 +127,8 @@ export default function Header() {
                   className="rounded-full px-4 gap-2 bg-primary text-foreground hover:bg-primary-hover"
                   onClick={handleLogout}
                 >
-                  <span className="max-w-32 truncate">{user.nome}</span>
-                  <LogOut className="h-4 w-4" aria-hidden="true" />
+                  <span className="max-w-32 truncate drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{user.nome}</span>
+                  <LogOut className="h-4 w-4 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]" aria-hidden="true" />
                   <span className="sr-only">Sair</span>
                 </Button>
               ) : (
@@ -135,15 +138,9 @@ export default function Header() {
                   size="sm"
                   className="rounded-full px-4 gap-2 bg-primary text-foreground hover:bg-primary-hover hover:text-primary-foreground"
                 >
-                  <NavLink to="/login">Entrar</NavLink>
+                  <NavLink to="/login" className="drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">Entrar</NavLink>
                 </Button>
               )}
-
-              <Button
-                asChild
-                size="sm"
-                className="rounded-full px-5 text-foreground bg-secondary hover:bg-secondary-hover"
-              ></Button>
             </div>
           </div>
         </header>
