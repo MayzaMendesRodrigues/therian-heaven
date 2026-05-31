@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CardAdoption from "../CardAdoption";
+import { Subtitle } from "../ui/subtitle";
 
 function hasAuthToken() {
   return Boolean(localStorage.getItem("jwt") || localStorage.getItem("token"));
@@ -39,19 +40,11 @@ export default function Adoption({ preview = false }) {
       <section className="bg-background py-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
-            <div>
-              <p className="text-sm font-medium text-primary uppercase tracking-wider">
-                Adoção
-              </p>
-              <h2 className="mt-2 text-4xl font-bold text-foreground">
-                Eles estão à sua espera
-              </h2>
-              <p className="mt-3 text-muted-foreground max-w-xl">
-                Enquanto você lê esta mensagem, muitos deles passam mais um dia
-                sem uma família. Adotar não muda apenas a vida de um Therian —
-                muda o mundo dele.
-              </p>
-            </div>
+            <Subtitle
+              tag="Adoção"
+              title="Eles estão à sua espera"
+              description="Enquanto você lê esta mensagem, muitos deles passam mais um dia esperando por uma família. Ao adotar, você não muda apenas a vida de um Therian — você se torna o mundo inteiro dele."
+            />
             {preview && (
               <NavLink
                 to={viewAllPath}

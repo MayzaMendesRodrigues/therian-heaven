@@ -86,7 +86,7 @@ export function DialogAdoption({ selected, onClose }) {
             title: `✗ Pedido de adoção reprovado`,
             description: rejectionReason,
             variant: "destructive",
-            duration: 80000,
+            duration: 8000,
           });
         }
       } else {
