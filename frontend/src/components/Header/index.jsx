@@ -5,33 +5,6 @@ import { NavLink } from "react-router-dom";
 
 export default function Header() {
   const [user, setUser] = useState(null);
-  const [adoption, setAdoption] = useState(null);
-
-  useEffect(() => {
-    function handleAdoptionPending(e) {
-      setAdoption({ name: e.detail.name, status: "pending", countdown: 40 });
-    }
-    window.addEventListener("adoption:pending", handleAdoptionPending);
-    return () => window.removeEventListener("adoption:pending", handleAdoptionPending);
-  }, []);
-
-  useEffect(() => {
-    if (!adoption || adoption.status !== "pending") return;
-    if (adoption.countdown <= 0) {
-      setAdoption((prev) => ({ ...prev, status: "approved" }));
-      return;
-    }
-    const t = setTimeout(() => {
-      setAdoption((prev) => ({ ...prev, countdown: prev.countdown - 1 }));
-    }, 1000);
-    return () => clearTimeout(t);
-  }, [adoption]);
-
-  useEffect(() => {
-    if (adoption?.status !== "approved") return;
-    const t = setTimeout(() => setAdoption(null), 5000);
-    return () => clearTimeout(t);
-  }, [adoption?.status]);
 
   useEffect(() => {
     function syncUser() {
@@ -112,22 +85,6 @@ export default function Header() {
                 Encontre um lar
               </NavLink>
             </nav>
-
-            {adoption && (
-              <div
-                className={`hidden md:flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full transition-all ${
-                  adoption.status === "pending"
-                    ? "bg-warning/20 text-warning-deep animate-pulse"
-                    : "bg-success/20 text-success-deep"
-                }`}
-              >
-                {adoption.status === "pending" ? (
-                  <>⏳ {adoption.name} · aguardando aprovação · {adoption.countdown}s</>
-                ) : (
-                  <>✓ Adoção de {adoption.name} aprovada!</>
-                )}
-              </div>
-            )}
 
             <div className="flex items-center gap-3">
               {user ? (

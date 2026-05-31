@@ -18,6 +18,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/hooks/use-toast";
 import { useState } from "react";
 
 export function DialogAdoption({ selected, onClose }) {
@@ -29,10 +30,62 @@ export function DialogAdoption({ selected, onClose }) {
   }
 
   function handleSendAdoption() {
-    window.dispatchEvent(
-      new CustomEvent("adoption:pending", { detail: { name: selected.name } }),
-    );
     setSuccessOpen(true);
+
+    const name = selected.name;
+    const COUNTDOWN = 40;
+    const approved = Math.random() < 0.5;
+
+    const rejectionReasons = [
+      `${name} foi reprovado após declarar que "o sofá é meu".`,
+      `${name} tentou negociar quem manda na casa. O pet venceu a entrevista.`,
+      `${name} apresentou sinais preocupantes de gostar de dormir sem um gato pisando no rosto.`,
+      `${name} não sobreviveu à fase experimental de latidos às 4h da manhã.`,
+      `${name} foi considerado emocionalmente frágil para encontrar vômito no tapete às 7h.`,
+      `${name} acredita que portas fechadas impedem a entrada de gatos.`,
+      `${name} demonstrou excesso de apego aos próprios móveis.`,
+      `${name} afirmou que nunca falaria sozinho com um animal. A banca avaliadora caiu na risada.`,
+      `${name} ainda acha que poderá ir ao banheiro desacompanhado.`,
+      `${name} não apresentou evidências de que aceita ser ignorado após gastar uma fortuna em brinquedos.`,
+      `${name} falhou ao responder quem ocupa o topo da cadeia alimentar da casa.`,
+      `${name} não está preparado para pagar a comida premium e receber desprezo em troca.`,
+      `${name} apresentou resistência ao conceito de pelos em absolutamente tudo.`,
+      `${name} acredita que acordar cedo é uma escolha.`,
+      `${name} foi informado sobre a existência de veterinários e decidiu fugir da entrevista.`,
+    ];
+
+    const rejectionReason =
+      rejectionReasons[Math.floor(Math.random() * rejectionReasons.length)];
+
+    const { update, dismiss } = toast({
+      title: `⏳ ${name} · aguardando aprovação`,
+      description: `${COUNTDOWN}s restantes`,
+      duration: Infinity,
+    });
+
+    let remaining = COUNTDOWN;
+    const interval = setInterval(() => {
+      remaining -= 1;
+      if (remaining <= 0) {
+        clearInterval(interval);
+        dismiss();
+        if (approved) {
+          toast({ title: `✓ Adoção de ${name} aprovada!`, duration: 1000 });
+        } else {
+          toast({
+            title: `✗ Pedido de adoção reprovado`,
+            description: rejectionReason,
+            variant: "destructive",
+            duration: 80000,
+          });
+        }
+      } else {
+        update({
+          title: `⏳ ${name} · aguardando aprovação`,
+          description: `${remaining}s restantes`,
+        });
+      }
+    }, 1000);
   }
 
   return (
