@@ -1,12 +1,13 @@
 import { Button } from "@/components/ui/button";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import therianLogo from "@/assets/therian logo.png";
-import { LogOut } from "lucide-react";
+import { LogOut, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 export default function Header() {
   const [user, setUser] = useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     function syncUser() {
@@ -141,8 +142,72 @@ export default function Header() {
                   <NavLink to="/login" className="drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">Entrar</NavLink>
                 </Button>
               )}
+
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden h-9 w-9 text-muted-foreground"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Alternar menu"
+              >
+                {isMenuOpen ? (
+                  <X className="h-5 w-5" />
+                ) : (
+                  <Menu className="h-5 w-5" />
+                )}
+              </Button>
             </div>
           </div>
+
+          {/* Navegação Mobile */}
+          {isMenuOpen && (
+            <nav className="md:hidden border-t border-border/60 bg-background px-6 py-8 flex flex-col gap-6 animate-in slide-in-from-top-5">
+              <NavLink
+                to="/"
+                onClick={() => setIsMenuOpen(false)}
+                className={({ isActive }) =>
+                  `text-lg font-medium transition-colors ${
+                    isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                  }`
+                }
+              >
+                Início
+              </NavLink>
+              <NavLink
+                to="/agendamento"
+                onClick={() => setIsMenuOpen(false)}
+                className={({ isActive }) =>
+                  `text-lg font-medium transition-colors ${
+                    isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                  }`
+                }
+              >
+                Agendamento
+              </NavLink>
+              <NavLink
+                to="/adocao"
+                onClick={() => setIsMenuOpen(false)}
+                className={({ isActive }) =>
+                  `text-lg font-medium transition-colors ${
+                    isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                  }`
+                }
+              >
+                Adoção
+              </NavLink>
+              <NavLink
+                to="/encontre-um-lar"
+                onClick={() => setIsMenuOpen(false)}
+                className={({ isActive }) =>
+                  `text-lg font-medium transition-colors ${
+                    isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                  }`
+                }
+              >
+                Encontre um lar
+              </NavLink>
+            </nav>
+          )}
         </header>
       </div>
     </header>
