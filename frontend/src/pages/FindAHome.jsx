@@ -106,7 +106,12 @@ export default function FindAHome() {
     };
 
     try {
-      await api.createTherian(therian);
+      const created = await api.createTherian(therian);
+      const storedUser = localStorage.getItem("user");
+      if (created?._id && storedUser) {
+        const user = JSON.parse(storedUser);
+        localStorage.setItem(`therian_owner_${created._id}`, user._id);
+      }
       form.reset();
       setAlimentacao("Carnivoro");
       setCastrado(true);

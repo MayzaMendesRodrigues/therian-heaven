@@ -64,6 +64,17 @@ class Api {
   getTherians() {
     return fetch(`${this._baseUrl}/therians`).then(this._checkResponse);
   }
+
+  deleteTherian(id) {
+    const token = localStorage.getItem("jwt") || localStorage.getItem("token");
+
+    return fetch(`${this._baseUrl}/therians/${id}`, {
+      method: "DELETE",
+      headers: {
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+    }).then(this._checkResponse);
+  }
 }
 
 const api = new Api({
