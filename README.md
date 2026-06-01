@@ -288,7 +288,7 @@ As pessoas responsáveis por isso tudo — vá pedir um petisco (vulgo biscoito)
   ↳ https://www.linkedin.com/in/nicolas-sg-br/
 
 - 🐾 **Marcela Couto**  
-  ↳ https://www.linkedin.com/in/marcelacouto
+  ↳ https://www.linkedin.com/in/marcela-graef-do-couto-8163472b0/
 
 
 
