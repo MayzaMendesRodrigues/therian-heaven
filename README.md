@@ -1,5 +1,9 @@
 <img width="907" height="557" alt="Group 16" src="https://github.com/user-attachments/assets/1ab75786-e7a2-493e-895a-5db3cd40a1d2" />
 
+### 🌐 Projeto Web
+- 🔗 Demo: https://therian-heaven.vercel.app/
+- 🎥 Apresentação: https://www.youtube.com/watch?v=bvSEhLZUv8M
+
  # 🐾 Therian Heaven
 
 > *"Um lar para quem late, mia, ruge e às vezes também paga boleto."*
